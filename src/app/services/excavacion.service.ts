@@ -11,7 +11,7 @@ export class ExcavacionService{
     public url: string;
     
     constructor(private _http:Http){
-        this.url="http://localhost:3001/api/excavacion";
+        this.url="http://localhost:3031/api/excavacion";
     }
 
     getExcavaciones():Observable<any> {
@@ -19,16 +19,16 @@ export class ExcavacionService{
     }
 
     getExcavacionesHome(param):Observable<any>{
-        return this._http.get("http://localhost:3001/api/excavacionHome/"+param).map(res=>res.json().excavacion);
+        return this._http.get("http://localhost:3031/api/excavacionHome/"+param).map(res=>res.json().excavacion);
     }
 
     getExcavacionesDirector(param):Observable<any>{
-        return this._http.get("http://localhost:3001/api/excavacionDirector/"+param).map(res =>res.json().excavaciones);
+        return this._http.get("http://localhost:3031/api/excavacionDirector/"+param).map(res =>res.json().excavaciones);
     }
     getExcavacionesPaleontologo(param):Observable<any>{
-        return this._http.get("http://localhost:3001/api/excavacionPaleontologo/"+param).map(res =>res.json().excavaciones);
+        return this._http.get("http://localhost:3031/api/excavacionPaleontologo/"+param).map(res =>res.json().excavaciones);
     }
     getExcavacionesColector(param):Observable<any>{
-        return this._http.get("http://localhost:3001/api/excavacionColector/"+param).map(res =>res.json().excavaciones);
+        return this._http.get("http://localhost:3031/api/excavacionColector/"+param).map(res =>res.json().excavaciones);
     }
 }
