@@ -1,0 +1,298 @@
+<div class="container">
+  <div class="row">      
+    <!-- Muestra las excavaciones Resumidamente -->
+    <main *ngIf= mostrarTodas class="posts-listing col-lg-8">                 
+      <div class="container">
+        <div class="row">
+          <!-- Exca nro 1 de la pagina -->
+          <div *ngIf ="excavaciones?.length >= indicePagina+1" class="post col-xl-6">
+            <div class="post-thumbnail"><img src={{rutaExca}}{{excavaciones[indicePagina]?._id}}{{excavaciones[indicePagina]?.fotosExcavacion[0]}}  alt="..." class="img-fluid"></div>
+            <div class="post-details">
+              <div class="post-meta d-flex justify-content-between">
+                <div class="date meta-last">{{excavaciones[(indicePagina)]?.fechaInicio | date:'dd/MM/yyyy' }}</div>
+                <div class="category">{{excavaciones[(indicePagina)]?.area}}</div>
+              </div><a (click)="setearFiltro(excavaciones[(indicePagina)]?.nombre)">
+                <h3 class="h4">{{excavaciones[(indicePagina)]?.nombre | uppercase }}</h3></a>
+              <p class="text-muted">{{excavaciones[(indicePagina)]?.descripcion}}</p>
+              <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                  <div class="title"><span><strong>DIRECTOR: </strong>{{excavaciones[(indicePagina)]?.director}}</span></div></a>
+              </footer>
+            </div>
+          </div>
+          <!-- Exca nro 2 de la pagina -->
+          <div *ngIf ="excavaciones?.length >=indicePagina+2" class="post col-xl-6">
+            <div class="post-thumbnail"><img src={{rutaExca}}{{excavaciones[indicePagina+1]?._id}}{{excavaciones[indicePagina+1]?.fotosExcavacion[0]}} alt="..." class="img-fluid"></div>
+            <div class="post-details">
+              <div class="post-meta d-flex justify-content-between">
+                <div class="date meta-last">{{excavaciones[indicePagina+1]?.fechaInicio | date:'dd/MM/yyyy' }}</div>
+                <div class="category">{{excavaciones[indicePagina+1]?.area}}</div>
+              </div><a (click)="setearFiltro(excavaciones[(indicePagina+1)]?.nombre)">
+                <h3 class="h4">{{excavaciones[indicePagina+1]?.nombre | uppercase }}</h3></a>
+              <p class="text-muted">{{excavaciones[indicePagina+1]?.descripcion}}</p>
+              <div class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                  <div class="title"><span><strong>DIRECTOR: </strong>{{excavaciones[indicePagina+1]?.director}}</span></div></a>
+              </div>
+            </div>
+          </div>
+          <!-- Exca nro 3 de la pagina -->
+          <div *ngIf ="excavaciones?.length >=indicePagina+3" class="post col-xl-6">
+            <div class="post-thumbnail"><img src={{rutaExca}}{{excavaciones[indicePagina+2]?._id}}{{excavaciones[indicePagina+2]?.fotosExcavacion[0]}}  alt="..." class="img-fluid"></div>
+            <div class="post-details">
+              <div class="post-meta d-flex justify-content-between">
+                <div class="date meta-last">{{excavaciones[indicePagina+2]?.fechaInicio | date:'dd/MM/yyyy' }}</div>
+                <div class="category">{{excavaciones[indicePagina+2]?.area}}</div>
+              </div><a (click)="setearFiltro(excavaciones[(indicePagina+2)]?.nombre)"> 
+                <h3 class="h4">{{excavaciones[indicePagina+2]?.nombre | uppercase }}</h3></a>
+              <p class="text-muted">{{excavaciones[indicePagina+2]?.descripcion}}</p>
+              <div class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                  <div class="title"><span><strong>DIRECTOR: </strong>{{excavaciones[indicePagina+2]?.director}}</span></div></a>
+              </div>
+            </div>
+          </div>
+          <!-- Exca nro 4 de la pagina -->
+          <div *ngIf ="excavaciones?.length >=indicePagina+4" class="post col-xl-6">
+            <div class="post-thumbnail"><img src={{rutaExca}}{{excavaciones[indicePagina+3]?._id}}{{excavaciones[indicePagina+3]?.fotosExcavacion[0]}} alt="..." class="img-fluid"></div>
+            <div class="post-details">
+              <div class="post-meta d-flex justify-content-between">
+                <div class="date meta-last">{{excavaciones[indicePagina+3]?.fechaInicio | date:'dd/MM/yyyy' }}</div>
+                <div class="category">{{excavaciones[indicePagina+3]?.area}}</div>
+              </div><a (click)="setearFiltro(excavaciones[(indicePagina+3)]?.nombre)">
+                <h3 class="h4">{{excavaciones[indicePagina+3]?.nombre | uppercase }}</h3></a>
+              <p class="text-muted">{{excavaciones[indicePagina+3]?.descripcion}}</p>
+              <div class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                  <div class="title"><span><strong>DIRECTOR: </strong>{{excavaciones[indicePagina+3]?.director}}</span></div></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Pagination de las excavaciones resumidas-->
+        <nav aria-label="Page navigation example">
+            <div class="pagination pagination-template d-flex justify-content-center">
+              <pagination [totalItems]="excavaciones.length" [itemsPerPage]="4" [(ngModel)]="currentPage"
+              (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;" ></pagination>
+            </div>
+        </nav>
+      </div>             
+    </main>
+    <!-- Muestra Solo la excavacion Buscada -->
+    <main *ngIf= !mostrarTodas class="post blog-post col-lg-8"> 
+      <div *ngIf = "(excavaciones | filterBy:filtrado ).length == 1" >
+        <div class="container" >
+          <div *ngFor="let excavacion of excavaciones | filterBy:filtrado | orderBy:['nombre'] ">
+            <div class="post-single">
+              <div class="post-thumbnail"><img src={{rutaExca}}{{excavacion._id}}{{excavacion.fotosExcavacion[0]}} alt="..." class="img-fluid"></div>
+              <div class="post-details">
+                <div class="post-meta d-flex justify-content-between">
+                  <div class="category">Inicio de Excavacion: {{excavacion.fechaInicio | date:'dd/MM/yyyy' }}</div>
+                </div>
+                <h1>{{excavacion.codigo}}: {{excavacion.nombre | uppercase}}</h1>
+                <div class="post-body">
+                  <p class="lead">{{excavacion.descripcion}}</p>
+                  <!--Carruselll -->
+                    <carousel *ngIf = "excavacion.fotosExcavacion.length > 1" >
+                        <slide *ngFor ="let foto of excavacion.fotosExcavacion" >
+                          <img src={{rutaExca}}{{excavacion._id}}{{foto}} alt="first slide" style="display: block; width: 100%;">
+                        </slide>                        
+                    </carousel>
+                  <br>
+                  <h3>Bochones y Ejemplares Asociados:</h3>
+                  <p>div Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus iusto voluptates deleniti similique rerum ducimus sint ex odio saepe. Sapiente quae pariatur ratione quis perspiciatis deleniti accusantium</p>
+                  <br>
+                  <div div class="widget categories" >
+                    <header>
+                      <h3 class="h3">Personal de la excavación: </h3>
+                    </header>
+                    <carousel *ngFor = "let excavacion of excavaciones | filterBy:filtrado">
+                        <slide *ngFor ="let persona of personal | filterBy:{_id:excavacion.directorId} ">
+                          <div class="text-center py-5 bg-secondary">
+                            <h2>Director de Excavación: </h2>
+                            <div class="lead">
+                              <h3>{{persona.nombres}}, {{persona.apellidos}} </h3>
+                              <p>Titulo: {{persona.titulos[0]}}: </p>
+                            </div>
+                          </div>
+                        </slide>
+                        <slide *ngFor ="let persona of personal | filterBy:{_id:excavacion.paleontologo} ">
+                            <div class="text-center py-5 bg-secondary">
+                              <h2>Paleontologo de Excavación: </h2>
+                              <div class="lead">
+                                <h3>{{persona.nombres}}, {{persona.apellidos}} </h3>
+                                <p>Titulo: {{persona.titulos[0]}}: </p>
+                              </div>
+                            </div>
+                          </slide>
+                          <slide *ngFor ="let persona of personal | filterBy:{_id:excavacion.colector} ">
+                              <div class="text-center py-5 bg-secondary">
+                                <h2>Colector de Excavación: </h2>
+                                <div class="lead">
+                                  <h3>{{persona.nombres}}, {{persona.apellidos}} </h3>
+                                  <p>Titulo: {{persona.titulos[0]}}: </p>
+                                </div>
+                              </div>
+                            </slide>
+                      </carousel>
+                    </div>                
+                  </div>
+                </div>                
+              </div>
+            </div>
+        </div>  
+      </div>
+      <div *ngIf = "(excavaciones | filterBy:filtrado ).length == 0 "   class="post-body" >
+          <p class="lead">La busqueda que planteo para las Excavaciones <strong>no dio</strong> resultado.</p>
+          <p>Tenga en cuenta que esta buscando por <strong>Nombre </strong> de la Excavación, agregre mas detalle a la busqueda. </p>
+      </div>
+      <div *ngIf = "(excavaciones | filterBy:filtrado ).length > 1 "   class="post-body" >
+          <p class="lead">La busqueda que planteo para las Excavaciones <strong>dio varios </strong> resultadoss.</p>
+          <p><strong>Seleccione </strong> una excavación de la siguiente lista o realice una nueva busqueda.</p>
+          <div *ngFor="let excavacion of excavaciones| filterBy:filtrado | orderBy:['nombre'] ">
+              <a (click)="setearFiltro(excavacion.nombre)">
+                  <h3 class="h4">{{excavacion.nombre | uppercase }}</h3>
+              </a>
+          </div>
+      </div>
+    </main>
+    <!-- Lo que va en lateral -->
+    <aside class="col-lg-4">
+      <!-- Widget busqueda de Excavaciones-->
+      <div class="widget search" *ngIf=mostrarTodas>
+        <header>
+          <h3 class="h6">Buscar Excavaciones</h3>
+        </header>
+        <div action="#" class="search-form">
+          <div class="form-group">
+            <input type="search" placeholder="Nombre de la Excavación?" [(ngModel)]= filtrado.nombre  name="buscaNombreExca">
+            <button type="submit" class="submit" (click)="mostrarExca()"><i class="icon-search"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="widget search" *ngIf=!mostrarTodas>
+        <header>
+          <h3 class="h6">Mostrar Todas las Excavaciones</h3>
+        </header>
+        <div action="#" class="search-form">
+          <div class="form-group">
+            <input type="text" placeholder="Haga click en la lupa" readonly>
+            <button type="submit" class="submit" (click)="mostrarExca()"><i class="icon-search"></i></button>
+          </div>
+        </div>
+      </div>
+      <!-- Widget [Muestra las excavaciones Home solo cuando se muestran todas]        -->
+      <div class="widget latest-posts" *ngIf= mostrarTodas>
+        <header>
+          <h3 class="h6">Excavaciones Importantes</h3>
+        </header>
+        <div class="blog-posts" *ngIf ="(excavaciones | filterBy:{muestraHome:true}).length > 0 ">          
+            <div class="item d-flex align-items-center" *ngFor = "let excaHome1 of excavaciones | filterBy:{muestraHome:true}">
+              <div class="image"><img src={{rutaExca}}{{excaHome1._id}}{{excaHome1.fotosExcavacion[0]}} alt="..." class="img-fluid"></div>
+              <div class="title"><strong>{{excaHome1.codigo}}: {{excaHome1.nombre | uppercase}}</strong>
+                <div class="d-flex align-items-center">
+                  <div class="date"><i class="icon-clock"(click)="setearFiltro(excaHome1.nombre)" ></i> Inicio: {{excaHome1.fechaInicio | date:'dd/MM/yyyy' }} </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      <!-- Widget [los videos disponibles de la excavacion seleccionada]-->
+      <div  *ngFor="let excavacion of excavaciones | filterBy:filtrado | orderBy:['nombre'] ">
+        <div class="widget categories" *ngIf= "!mostrarTodas && (excavacion.videosExcavacion.length > 0) && (excavaciones | filterBy:filtrado).length == 1 ">
+          <header>
+            <h3 class="h6">Videos de la excavación: </h3>
+          </header>
+          <video src={{rutaExca}}{{excavacion._id}}{{excavacion.videosExcavacion[indiceVideo]}} width="240" height="160"  controls muted preload></video>
+          <nav aria-label="Page navigation videos">
+              <div class="pagination pagination-template d-flex justify-content-center">
+                <pagination [totalItems]="excavacion.videosExcavacion.length" [itemsPerPage]="1" [(ngModel)]="currentVideo"
+                (pageChanged)="videoChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;" ></pagination>
+              </div>
+          </nav>  
+        </div>
+      </div>  
+        <!-- Widget [Los Bochones Asociados con sus Ejemplares ]        -->
+        <div class="widget latest-posts" *ngIf="!mostrarTodas" >
+          <div  *ngIf="bochones.length >0" >
+              <header>
+                  <h3 class="h6">Bochones Asociados:</h3>
+                </header>
+                <div class="blog-posts" *ngFor="let bochon of bochones " >
+                  <div *ngIf =mostrarEjemplares>
+                    <div class="item d-flex align-items-center" *ngFor="let ejemplar of ejemplares | filterBy:{_id:bochon.ejemplarAsociado} ">
+                      <div class="image"><a href={{rutaEjem}}{{ejemplar._id}}{{ejemplar.ilustracionCompleta}} data-fancybox="gallery" class="image">
+                        <img src={{rutaEjem}}{{ejemplar._id}}{{ejemplar.ilustracionCompleta}} alt="..." class="img-fluid"></a>
+                      </div>
+                        <div class="title"><strong>{{ejemplar.nombre}}</strong>
+                          <div class="d-flex align-items-center">
+                              <div class="date"><a (click)="openModal(templateEjemplar)" ><i class="icon-clock"></i> Ingreso: {{ejemplar.fechaIngresoColeccion | date:'dd/MM/yyyy' }}
+                                <ng-template #templateEjemplar>
+                                  <div class="modal-header">
+                                    <h4 class="modal-title pull-left">{{ejemplar.nombre}}</h4>
+                                    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                      <li><strong>Nro Coleccion: </strong> {{ejemplar.nroColeccion}}</li>
+                                      <li><strong>Taxon Reino: </strong> {{ejemplar.taxonReino}}</li>
+                                      <li><strong>Taxon Filo: </strong> {{ejemplar.taxonFilo}} </li>
+                                      <li><strong>Taxon Clase: </strong> {{ejemplar.taxonClase}}</li>
+                                      <li><strong>Taxon Orden: </strong> {{ejemplar.taxonOrden}}</li>
+                                      <li><strong>Taxon Familia: </strong> {{ejemplar.taxonFamilia}}</li>                      
+                                      <li><strong>Taxon Genero: </strong> {{ejemplar.taxonGenero}}</li>
+                                      <li><strong>Taxon Especie: </strong> {{ejemplar.taxonEspecie}}</li>
+                                      <li><strong>Dimensión Largo: </strong> {{ejemplar.dimensionLargo}} mts.</li>
+                                      <li><strong>Dimensión Alto: </strong> {{ejemplar.dimensionAlto}} mts.</li>
+                                      <li><strong>Peso: </strong> {{ejemplar.peso}} kgrs.</li>
+                                      <li><strong>Alimentación: </strong> {{ejemplar.alimentacion}}</li>
+                                      <h4>Area de Hallazgo: </h4>
+                                      <li><strong>Nombre: </strong>{{ejemplar.areaHallazgo[0].nombreArea}}</li>
+                                      <li><strong>País: </strong>{{ejemplar.areaHallazgo[0].pais}}</li>
+                                      <li><strong>Ciudad: </strong>{{ejemplar.areaHallazgo[0].ciudad}}</li>
+                                  </div>
+                                </ng-template>
+                              </a></div>
+                          </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="widget tags">
+                    <ul class="list-inline">
+                      <li class="list-inline-item">
+                        <a (click)="openModal(template)" class="tag">Bochon: {{bochon.nombre}}</a>
+                        <ng-template #template>
+                            <div class="modal-header">
+                              <h4 class="modal-title pull-left">Bochon: {{bochon.nombre}}</h4>
+                              <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <li><strong>Nro de Campo: </strong>{{bochon.nroCampo}}</li>
+                              <li><strong>Preparador: </strong> {{bochon.preparador}} </li>
+                              <li><strong>Preparación: </strong>{{bochon.tipoPreparacion}}</li>
+                              <li><strong>Acidos Aplicados: </strong> 
+                                <div *ngFor="let acido of bochon.acidosAplicados">
+                                  <li  align="center"  >{{acido}}</li> 
+                                </div>  
+                              </li>
+                            </div>
+                          </ng-template>
+                      </li>
+                    </ul>
+                  </div>
+
+                </div>
+                <div class="widget tags" *ngIf=!mostrarEjemplares>
+                    <ul class="list-inline">
+                      <li class="list-inline-item">
+                        <a (click)="elimEjemDupli()" class="tag">Ver Ejemplares</a>
+                      </li>
+                    </ul>
+                </div>
+          </div>
+          <div *ngIf="bochones.length ==0" >
+              <p>No hay <strong> BOCHONES </strong>asociados a la Excavación, por lo tanto tampoco hay <strong>EJEMPLARES</strong></p>
+          </div>
+        </div>
+    </aside>
+  </div>             
+ </div>

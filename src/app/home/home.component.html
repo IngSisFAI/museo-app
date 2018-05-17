@@ -1,0 +1,144 @@
+ <!-- Hero Section-->
+  <section style="background: url(assets/datos/home/portada11.jpg); background-size: cover; background-position: center center" class="hero">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7">
+          <h1>Proyecto Tesis -MEAN Stack y WCAG 2.0</h1>
+        </div>
+      </div><a ng-href=".intro" class="continue link-scroll"><i class="fa fa-long-arrow-down"></i> Scroll Down</a>
+    </div>
+  </section>
+  <!-- Intro Section-->
+  <section class="intro">
+    <div class="container">
+        <div class="row">
+        <div class="col-lg-8">
+            <h2 class="h3">Aca va la gran introduccion</h2>
+            <p class="text-big">Colocar una <strong>introduccion</strong> aqui <strong>que capture la atención del lector</strong>. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderi.</p>
+        </div>
+        </div>
+    </div>
+  </section>
+  <!-- Seccion de las Excavaciones important-->
+  <section class="featured-posts no-padding-top">
+    <div *ngIf ="excavacionesHome.length > 0" class="container">
+      <!-- Post- Excavacion 1 -->
+      <div *ngIf ="excavacionesHome.length > 0 " class="row d-flex align-items-stretch">
+        <div class="text col-lg-7">
+          <div class="text-inner d-flex align-items-center">
+            <div class="content">
+              <header class="post-header">
+                <div class="category"><strong>FECHA INICIO: </strong>{{excavacionesHome[0]?.fechaInicio | date:'dd/MM/yyyy' }} <strong>AREA: </strong>{{excavacionesHome[0]?.area}}</div>
+                <a [routerLink]="['/excavacion']" [routerLinkActive]="['activado']"><h2 class="h4">{{excavacionesHome[0]?.nombre | uppercase }}</h2></a>
+              </header>
+              <p>{{excavacionesHome[0]?.descripcion}}</p>
+              <footer class="post-footer d-flex align-items-center"><a class="author d-flex align-items-center flex-wrap">
+                <div class="title"><span><strong>Director: </strong> {{excavacionesHome[0]?.director}}</span></div></a>
+                <div class="date"><i class="icon-clock"></i> {{excavacionesHome[0]?.fechaInicio | date:'dd/MM/yyyy' }} </div>
+              </footer>
+            </div>
+          </div>
+        </div>
+        <div class="image col-lg-5"><img src={{rutaExca}}{{excavacionesHome[0]?._id}}{{excavacionesHome[0]?.fotosExcavacion[0]}} alt="..."></div>
+      </div>
+      <!-- Post     Excavacion 2   -->
+      <div *ngIf = "excavacionesHome.length > 1 " class="row d-flex align-items-stretch">
+        <div class="image col-lg-5"><img src={{rutaExca}}{{excavacionesHome[1]?._id}}{{excavacionesHome[1]?.fotosExcavacion[0]}} alt="..."></div>
+          <div class="text col-lg-7">
+            <div class="text-inner d-flex align-items-center">
+              <div class="content">
+                <header class="post-header">
+                  <div class="category"><a href="#">FECHA INICIO: {{excavacionesHome[1]?.fechaInicio | date:'dd/MM/yyyy' }}</a><a href="#">AREA: {{excavacionesHome[1]?.area}}</a></div>
+                  <a [routerLink]="['/excavacion']" [routerLinkActive]="['activado']"><h2 class="h4">{{excavacionesHome[1]?.nombre | uppercase }}</h2></a>
+                </header>
+                <p>{{excavacionesHome[1]?.descripcion}}</p>
+                <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                  <div class="title"><span><strong>Director: </strong>{{excavacionesHome[1]?.director}}</span></div></a>
+                  <div class="date"><i class="icon-clock"></i> {{excavacionesHome[1]?.fechaInicio | date:'dd/MM/yyyy' }}</div>
+                </footer>
+              </div>
+           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Divider Section-->
+  <section style="background: url(assets/img/divider-bg.jpg); background-size: cover; background-position: center bottom" class="divider">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7">
+          <h2>Aca va un texto que represente el objetivo/mision del museo por ejemplo....</h2><a href="#" class="hero-link">View More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Latest Posts // Algunos Ejemplares -->
+  <section class="latest-posts" *ngIf="ejemplaresHome.length >0"> 
+    <div class="container"> 
+      <header> 
+        <h2>Los últimos ejemplares hallados...</h2>
+        <p class="text-big">Aca va una pequeña reseña de que significa el hallazgo de un ejemplar</p>
+      </header>
+      <div class="row" >
+        <!-- Muestra el Ejemplar priorizado como 1 -->
+        <div class="post col-md-4" *ngIf="ejemplaresHome.length > 0" >
+          <div class="post-thumbnail"><img src={{rutaEjem}}{{ejemplaresHome[0]?._id}}{{ejemplaresHome[0]?.ilustracionCompleta}} alt="..." class="img-fluid"></div>
+          <div class="post-details">
+            <div class="post-meta d-flex justify-content-between">
+              <div class="date">Ingreso:  {{ejemplaresHome[0]?.fechaIngresoColeccion | date:'dd/MM/yyyy'}}</div>
+              <div class="category">Coleccion:{{ejemplaresHome[0]?.nroColeccion}}</div>
+            </div>
+            <a  [routerLink]="['/ejemplar']" [routerLinkActive]="['activado']"><h3 class="h4">{{ejemplaresHome[0]?.nombre}}:{{ejemplaresHome[0]?.periodo}}</h3></a>
+            <p class="text-muted">{{ejemplaresHome[0]?.descripcion1}}</p>
+          </div>
+        </div>
+        <!-- Muestra el Ejemplar priorizado como 2 -->
+        <div class="post col-md-4"  *ngIf="ejemplaresHome.length > 1" >
+          <div class="post-thumbnail"><img src={{rutaEjem}}{{ejemplaresHome[1]?._id}}{{ejemplaresHome[1]?.ilustracionCompleta}} alt="..." class="img-fluid"></div>
+          <div class="post-details">
+            <div class="post-meta d-flex justify-content-between">
+              <div class="date">Ingreso:  {{ejemplaresHome[1]?.fechaIngresoColeccion | date:'dd/MM/yyyy'}}</div>
+              <div class="category">Coleccion:{{ejemplaresHome[1]?.nroColeccion}}</div>
+            </div>
+            <a  [routerLink]="['/ejemplar']" [routerLinkActive]="['activado']"><h3 class="h4">{{ejemplaresHome[1]?.nombre}}:{{ejemplaresHome[1]?.periodo}}</h3></a>
+            <p class="text-muted">{{ejemplaresHome[1]?.descripcion1}}</p>
+          </div>
+        </div>
+        <!-- Muestra el Ejemplar priorizado como 3 -->
+        <div class="post col-md-4"  *ngIf="ejemplaresHome.length > 2">
+          <div class="post-thumbnail"><img src={{rutaEjem}}{{ejemplaresHome[2]?._id}}{{ejemplaresHome[2]?.ilustracionCompleta}} alt="..." class="img-fluid"></div>
+          <div class="post-details">
+            <div class="post-meta d-flex justify-content-between">
+              <div class="date">Ingreso:{{ejemplaresHome[2]?.fechaIngresoColeccion | date:'dd/MM/yyyy'}}</div>
+              <div class="category">Coleccion:{{ejemplaresHome[2]?.nroColeccion}}</div>
+            </div>
+            <a  [routerLink]="['/ejemplar']" [routerLinkActive]="['activado']"><h3 class="h4">{{ejemplaresHome[2]?.nombre}}:{{ejemplaresHome[2]?.periodo}}</h3></a>
+            <p class="text-muted">{{ejemplaresHome[2]?.descripcion1}}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+   <!-- Gallery Section // galeria de fotos -->
+  <section class="gallery no-padding">    
+    <div class="row">
+      <div class="mix col-lg-3 col-md-3 col-sm-6">
+        <div class="item"><a href="assets/datos/home/1.jpg" data-fancybox="gallery" class="image"><img src="assets/datos/home/1.jpg" alt="..." class="img-fluid">
+            <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+      </div>
+      <div class="mix col-lg-3 col-md-3 col-sm-6">
+        <div class="item"><a href="assets/datos/home/2.jpg" data-fancybox="gallery" class="image"><img src="assets/datos/home/2.jpg" alt="..." class="img-fluid">
+            <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+      </div>
+      <div class="mix col-lg-3 col-md-3 col-sm-6">
+        <div class="item"><a href="assets/datos/home/3.jpg" data-fancybox="gallery" class="image"><img src="assets/datos/home/3.jpg" alt="..." class="img-fluid">
+            <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+      </div>
+      <div class="mix col-lg-3 col-md-3 col-sm-6">
+        <div class="item"><a href="assets/datos/home/4.jpg" data-fancybox="gallery" class="image"><img src="assets/datos/home/4.jpg" alt="..." class="img-fluid">
+            <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+      </div>
+    </div>
+  </section>
+
