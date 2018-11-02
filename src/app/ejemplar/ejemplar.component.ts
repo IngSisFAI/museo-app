@@ -5,9 +5,6 @@ import {EjemplarService} from '../services/ejemplar.service';
 import {PiezaService} from '../services/pieza.service';
 import {BochonService} from '../services/bochon.service';
 
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-
 @Component({
     selector:'Ejemplares',
     templateUrl:'./ejemplar.component.html',
@@ -27,13 +24,11 @@ export class EjemplaresComponent {
     public page: number;
     public currentVideo;
     public indiceVideo;
-    modalRef: BsModalRef;
     
 
     constructor(private _peticionesService: EjemplarService, 
                 private _peticionesPieService: PiezaService,
-                private _peticionesBochonService: BochonService,
-                private modalService: BsModalService){
+                private _peticionesBochonService: BochonService ){
         this.ejemplares=[];
         this.piezas=[];
         this.bochones=[];
@@ -127,7 +122,6 @@ videoChanged(event: any): void {
     this.page = event.page;
     this.indiceVideo = this.page-1
 }
-openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-  }
+
+
 }

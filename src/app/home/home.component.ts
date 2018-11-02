@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import { ExcavacionesComponent} from '../excavacion/excavacion.component';
 import { ExcavacionService } from '../services/excavacion.service';
 import { EjemplarService } from '../services/ejemplar.service';
+import {HomeService } from '../services/home.service';
 import { Pipe, PipeTransform } from '@angular/core';
 
 //const config = require('../config');
@@ -10,7 +11,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Component({
     selector: 'Home',
     templateUrl: './home.component.html',
-    providers: [ExcavacionService, EjemplarService]
+    providers: [ExcavacionService, EjemplarService, HomeService]
 })
 
 export class HomeComponent {
@@ -18,19 +19,25 @@ export class HomeComponent {
     public rutaExca: string;
     public ejemplaresHome;
     public rutaEjem:string;
+    public infoHome;
+    public rutaHome:string;
     
 
     constructor(private _peticionesService: ExcavacionService, 
-                private _peticionesEjemService: EjemplarService){
+                private _peticionesEjemService: EjemplarService,
+                private _peticionesHome: HomeService){
         this.excavacionesHome=[];
         this.rutaExca ='assets/datos/excavaciones/';
         this.rutaEjem='assets/datos/ejemplares/';
+        this.rutaHome='assets/datos/home/';
         this.ejemplaresHome=[];
+        this.infoHome=[];
         }
         
     ngOnInit(){
         this.obtenerExcaHome();
         this.obtenerEjemHome();
+        this.obtenerInfoHome();        
     }
 
 private obtenerExcaHome(){
@@ -58,6 +65,22 @@ private obtenerEjemHome(){
         error =>{console.log(<any>error);}
 
     );
+}
+
+private obtenerInfoHome(){
+    this._peticionesHome.getInfoHome().subscribe(
+        result => {
+            console.log("infoHome es"+result);
+            this.infoHome= result;
+            if(!this.infoHome){
+                console.log("Error al tratar de recuperar la informacion general del Home"+ result);
+            }
+        },
+        error =>{
+            console.log(<any>error);
+        }
+    );   
+
 }
 
 }

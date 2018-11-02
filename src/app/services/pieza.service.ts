@@ -11,7 +11,7 @@ export class PiezaService{
     public url: string;
     
     constructor(private _http:Http){
-        this.url="http://localhost:3031/api/";
+        this.url="http://localhost:3001/api/";
     }
 
     getPiezas():Observable<any> {

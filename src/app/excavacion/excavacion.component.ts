@@ -45,6 +45,9 @@ export class ExcavacionesComponent {
     modalRef: BsModalRef;
     public mostrarEjemplares:boolean;
     private ejemUnico;
+    public  isCollapsed: boolean;
+
+    public indice: number;
 
     constructor(private _peticionesService: ExcavacionService, 
                 private _peticionesPerService: PersonaService,
@@ -73,6 +76,8 @@ export class ExcavacionesComponent {
         this.indiceVideo=0;
         this.excaElegida={};        
         this.mostrarEjemplares=false;
+        this.isCollapsed = false;
+        this.indice=1;
     }
 ngOnInit(){
     this.obtenerExcavaciones();
@@ -212,8 +217,8 @@ elimEjemDupli(){
          this.ejemplaresUnico(element);
     }
     this.ejemplares=this.ejemUnico;
-    this.mostrarEjemplares=true;
-
+    if (this.mostrarEjemplares){this.mostrarEjemplares=false}
+    else {this.mostrarEjemplares=true};
 }
 ejemplaresUnico(ejemplar){
     let esta=false;
@@ -266,4 +271,5 @@ setearFiltro(param){
 openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
+
 }

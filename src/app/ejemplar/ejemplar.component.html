@@ -1,220 +1,212 @@
-<div *ngIf = "ejemplares?.length > 0" class="container">
-    <div class="row">
-      <!-- Muestra solo un Ejemplar -->
-      <main *ngIf = "!mostrarTodas" class="post blog-post col-lg-8"> 
-        <div class="container">
-          <div class="row">
-            <div class="post-single"  *ngFor="let ejemplar of ejemplares | filterBy:filtrado | orderBy:['nombre'] " >
-              <div class="post-thumbnail"><img  src={{rutaEjem}}{{ejemplar._id}}{{ejemplar.ilustracionCompleta}} alt="..." class="img-fluid"></div>            
-              <div class="post-details">
-                <h1>{{ejemplar.nombre}}:{{ejemplar.periodo}}<a (click)="openModal(templated)"><i class="fa fa-bookmark-o"></i>
-                <ng-template #templated>
-                    <div class="modal-header">
-                      <h4 class="modal-title pull-left">{{ejemplar.nombre}}</h4>
-                      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
+<div class="container">
+  <div class="row">
+    <main class="post blog-post col-lg-8">
+      <!--Si hay ejemplares para mostrar -->
+      <div *ngIf = "ejemplares?.length > 0" >      
+            <!-- Muestra solo un Ejemplar -->
+            <div *ngIf = "!mostrarTodas" > 
+              <!--Muestra un ejemplar porque el filtrado dio uno -->
+              <div *ngIf ="(ejemplares | filterBy:filtrado).length == 1">
+                <div class="container">
+                  <div class="row">
+                    <div class="post-single"  *ngFor="let ejemplar of ejemplares | filterBy:filtrado | orderBy:['nombre'] " >
+                      <div tabindex="0" class="post-thumbnail"><img  src={{rutaEjem}}{{ejemplar._id}}{{ejemplar.ilustracionCompleta}} alt={{ejemplar.descripcionIC}} class="img-fluid"></div>            
+                      <div class="post-details">
+                        <h2 tabindex="0" >{{ejemplar.nombre}}:{{ejemplar.periodo}}</h2>  
+                        <div class="widget tags"> 
+                          <h3 tabindex="0" class="h5">Nro de Coleccion:{{ejemplar.nroColeccion}} </h3>
+                          <h3 tabindex="0" class="h6" >Fecha de Ingreso: {{ejemplar.fechaIngresoColeccion | date:'dd/MM/yyyy'}}</h3>
+                          <ul class="list-inline">
+                            <li class="list-inline-item"><a tabindex="0" class="tag" data-toggle="collapse" href="#clasificacionCompletaEjemplar" role="button" aria-expanded="false" aria-controls="clasificacionCompleta" > Clasificación</a></li>
+                          </ul>
+                          <div class="collapse" id="clasificacionCompletaEjemplar">
+                              <div class="card card-body">
+                                <h3 tabindex="0" class="h6">Clasificación detallada del Ejemplar:</h3>
+                                <li tabindex="0" ><strong>Taxon Reino: </strong> {{ejemplar.taxonReino}}</li>
+                                <li tabindex="0"><strong>Taxon Filo: </strong> {{ejemplar.taxonFilo}} </li>
+                                <li tabindex="0"><strong>Taxon Clase: </strong> {{ejemplar.taxonClase}}</li>
+                                <li tabindex="0"><strong>Taxon Orden: </strong> {{ejemplar.taxonOrden}}</li>
+                                <li tabindex="0"><strong>Taxon Familia: </strong> {{ejemplar.taxonFamilia}}</li>                      
+                                <li tabindex="0"><strong>Taxon Genero: </strong> {{ejemplar.taxonGenero}}</li>
+                                <li tabindex="0"><strong>Taxon Especie: </strong> {{ejemplar.taxonEspecie}}</li>
+                                <li tabindex="0"><strong>Dimensión Largo: </strong> {{ejemplar.dimensionLargo}} mts.</li>
+                                <li tabindex="0"><strong>Dimensión Alto: </strong> {{ejemplar.dimensionAlto}} mts.</li>
+                                <li tabindex="0"><strong>Peso: </strong> {{ejemplar.peso}} kgrs.</li>
+                                <li tabindex="0"><strong>Alimentación: </strong> {{ejemplar.alimentacion}}</li>
+                              </div>
+                          </div>
+                          <br>
+                          <p tabindex="0" class="lead">{{ejemplar.descripcion1}}</p>
+                          <p tabindex="0">{{ejemplar.descripcion1A}}</p>
+                        </div>
+                        <div class="post-body">
+                          <carousel *ngIf = "ejemplar.fotosEjemplar.length >=1 " >
+                              <slide *ngFor ="let foto of ejemplar.fotosEjemplar" >
+                                <img src={{rutaEjem}}{{ejemplar._id}}{{foto.nombre}} alt={{foto.descripcion}} style="display: block; width: 100%;">
+                              </slide>                        
+                          </carousel>
+                          <br>
+                          <h3 tabindex="0">Era Geologica: </h3>
+                          <p tabindex="0">{{ejemplar.descripcion2}}</p>
+                          <li tabindex="0"><strong>Formación: </strong>{{ejemplar.eraGeologica[0].formacion}}</li>
+                          <li tabindex="0"><strong>Grupo: </strong>{{ejemplar.eraGeologica[0].grupo}}</li>
+                          <li tabindex="0"><strong>Subgrupo: </strong>{{ejemplar.eraGeologica[0].subgrupo}}</li>
+                          <li tabindex="0"><strong>Edad: </strong>{{ejemplar.eraGeologica[0].edad}}</li>
+                          <li tabindex="0"><strong>Periodo: </strong>{{ejemplar.eraGeologica[0].periodo}}</li>
+                          <li tabindex="0"><strong>Era: </strong>{{ejemplar.eraGeologica[0].era}}</li>
+                          <br>
+                          <blockquote class="blockquote">
+                            <p tabindex="0">Una era geológica es una unidad geocronológica formal de la escala temporal geológica que representa el tiempo correspondiente a la duración de un eratema, la unidad cronoestratigráfica equivalente que comprende todas las rocas formadas en ese tiempo. Las eras son una de las divisiones mayores del tiempo geológico, son subdivisiones de los eones y se dividen a su vez en períodos.</p>
+                          </blockquote>
+                          <h4 tabindex="0">Area de Hallazgo: </h4>
+                          <p tabindex="0">{{ejemplar.descripcion3}}</p>
+                          <li tabindex="0"><strong>Nombre: </strong>{{ejemplar.areaHallazgo[0].nombreArea}}</li>
+                          <li tabindex="0"><strong>País: </strong>{{ejemplar.areaHallazgo[0].pais}}</li>
+                          <li tabindex="0"><strong>Ciudad: </strong>{{ejemplar.areaHallazgo[0].ciudad}}</li>
+                        </div>                            
+                      </div>
                     </div>
-                    <div class="modal-body">
-                      <li><strong>Taxon Reino: </strong> {{ejemplar.taxonReino}}</li>
-                      <li><strong>Taxon Filo: </strong> {{ejemplar.taxonFilo}} </li>
-                      <li><strong>Taxon Clase: </strong> {{ejemplar.taxonClase}}</li>
-                      <li><strong>Taxon Orden: </strong> {{ejemplar.taxonOrden}}</li>
-                      <li><strong>Taxon Familia: </strong> {{ejemplar.taxonFamilia}}</li>                      
-                      <li><strong>Taxon Genero: </strong> {{ejemplar.taxonGenero}}</li>
-                      <li><strong>Taxon Especie: </strong> {{ejemplar.taxonEspecie}}</li>
-                      <li><strong>Dimensión Largo: </strong> {{ejemplar.dimensionLargo}} mts.</li>
-                      <li><strong>Dimensión Alto: </strong> {{ejemplar.dimensionAlto}} mts.</li>
-                      <li><strong>Peso: </strong> {{ejemplar.peso}} kgrs.</li>
-                      <li><strong>Alimentación: </strong> {{ejemplar.alimentacion}}</li>
-                    </div>
-                  </ng-template></a></h1>
-                <h5>Nro de Coleccion:{{ejemplar.nroColeccion}} </h5>
-                <h6>Fecha de Ingreso: {{ejemplar.fechaIngresoColeccion | date:'dd/MM/yyyy'}}</h6>
-                <div class="post-body">
-                  <p class="lead">{{ejemplar.descripcion1}}</p>
-                  <p>{{ejemplar.descripcion1A}}</p>
-                  <carousel *ngIf = "ejemplar.fotosEjemplar.length >=1 " >
-                      <slide *ngFor ="let foto of ejemplar.fotosEjemplar" >
-                        <img src={{rutaEjem}}{{ejemplar._id}}{{foto}} alt="first slide" style="display: block; width: 100%;">
-                      </slide>                        
-                  </carousel>
-                  <br>
-                  <h3>Era Geologica: </h3>
-                  <p>{{ejemplar.descripcion2}}</p>
-                  <li><strong>Formación: </strong>{{ejemplar.eraGeologica[0].formacion}}</li>
-                  <li><strong>Grupo: </strong>{{ejemplar.eraGeologica[0].grupo}}</li>
-                  <li><strong>Subgrupo: </strong>{{ejemplar.eraGeologica[0].subgrupo}}</li>
-                  <li><strong>Edad: </strong>{{ejemplar.eraGeologica[0].edad}}</li>
-                  <li><strong>Periodo: </strong>{{ejemplar.eraGeologica[0].periodo}}</li>
-                  <li><strong>Era: </strong>{{ejemplar.eraGeologica[0].era}}</li>
-                  <br>
-                  <blockquote class="blockquote">
-                    <p>Una era geológica es una unidad geocronológica formal de la escala temporal geológica que representa el tiempo correspondiente a la duración de un eratema, la unidad cronoestratigráfica equivalente que comprende todas las rocas formadas en ese tiempo. Las eras son una de las divisiones mayores del tiempo geológico, son subdivisiones de los eones y se dividen a su vez en períodos.</p>
-                    <footer class="blockquote-footer">Referencia: 
-                      <cite title="Source Title">wikipedia.org</cite>
-                    </footer>
-                  </blockquote>
-                  <h4>Area de Hallazgo: </h4>
-                  <p>{{ejemplar.descripcion3}}</p>
-                  <li><strong>Nombre: </strong>{{ejemplar.areaHallazgo[0].nombreArea}}</li>
-                  <li><strong>País: </strong>{{ejemplar.areaHallazgo[0].pais}}</li>
-                  <li><strong>Ciudad: </strong>{{ejemplar.areaHallazgo[0].ciudad}}</li>
-                </div>                            
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-      <!--Muestra los Ejemplares resumidos-->
-      <main *ngIf= "mostrarTodas" class="posts-listing col-lg-8">
-        <div class="container">
-          <div class="row">
-            <!-- Ejem nro 1 de la pagina -->
-            <div *ngIf ="ejemplares?.length >= indicePagina+1" class="post col-xl-6">
-              <div class="post-thumbnail"><img src={{rutaEjem}}{{ejemplares[indicePagina]?._id}}{{ejemplares[indicePagina]?.ilustracionCompleta}}  alt="..." class="img-fluid"></div>
-              <div class="post-details">
-                <div class="post-meta d-flex justify-content-between">
-                  <div class="date meta-last">Especie: {{ejemplares[(indicePagina)]?.taxonEspecie}}</div>
-                  <div class="category">Familia: {{ejemplares[(indicePagina)]?.taxonFamilia}}</div>
-                </div><a (click)="setearFiltro(ejemplares[(indicePagina)]?.nombre)">
-                  <h3 class="h4">{{ejemplares[(indicePagina)]?.nombre | uppercase }}</h3></a>
-                <p class="text-muted">{{ejemplares[(indicePagina)]?.descripcion1}}</p>
-              </div>
-            </div>
-            <!-- Ejem nro 2 de la pagina -->
-            <div *ngIf ="ejemplares?.length >=indicePagina+2" class="post col-xl-6">
-              <div class="post-thumbnail"><img src={{rutaEjem}}{{ejemplares[indicePagina+1]?._id}}{{ejemplares[indicePagina+1]?.ilustracionCompleta}}  alt="..." class="img-fluid"></div>
-              <div class="post-details">
-                <div class="post-meta d-flex justify-content-between">
-                  <div class="date meta-last">Especie: {{ejemplares[(indicePagina+1)]?.taxonEspecie}}</div>
-                  <div class="category">Familia: {{ejemplares[(indicePagina+1)]?.taxonFamilia}}</div>
-                </div><a (click)="setearFiltro(ejemplares[(indicePagina+1)]?.nombre)">
-                  <h3 class="h4">{{ejemplares[(indicePagina+1)]?.nombre | uppercase }}</h3></a>
-                <p class="text-muted">{{ejemplares[(indicePagina+1)]?.descripcion1}}</p>
-              </div>
-            </div>
-          </div>
-          <nav aria-label="Page navigation example">
-            <div class="pagination pagination-template d-flex justify-content-center">
-              <pagination [totalItems]="ejemplares.length" [itemsPerPage]="2" [(ngModel)]="currentPage"
-              (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;" ></pagination>
-            </div>            
-          </nav>
-        </div>
-      </main>
-      <!-- Muestra el lateral segun todos o no -->
-      <aside class="col-lg-4">
-        <!-- Widget [Barra de Busqueda de Ejemplares]--> 
-        <div class="widget search" *ngIf=mostrarTodas>
-          <header>
-            <h3 class="h6">Buscar Ejemplares:</h3>
-          </header>
-          <div action="#" class="search-form">
-            <div class="form-group">
-              <input type="search" placeholder="Nombre del Ejemplar?"  [(ngModel)]= filtrado.nombre name="buscaNombreEjem">
-              <button type="submit" class="submit" (click)="mostrarEjem()"><i class="icon-search"></i></button>
-            </div>
-          </div>
-        </div>
-        <div class="widget search" *ngIf=!mostrarTodas>
-            <header>
-              <h3 class="h6">Mostrar Todos los Ejemplares</h3>
-            </header>
-            <div action="#" class="search-form">
-              <div class="form-group">
-                <input type="text" placeholder="Haga click en la lupa" readonly>
-                <button type="submit" class="submit" (click)="mostrarEjem()"><i class="icon-search"></i></button>
-              </div>
-            </div>
-          </div>
-        <!-- Widget [Las Piezas Asociadas]        -->
-        <div class="widget latest-posts" *ngIf="!mostrarTodas && (piezas.length >0)" >
-          <header>
-            <h3 class="h6">Piezas:</h3>
-          </header>
-          <div class="blog-posts" *ngFor="let ejemplar of ejemplares | filterBy:filtrado | orderBy:['nombre'] " >
-              <div class="item d-flex align-items-center" *ngFor="let pieza of piezas | filterBy:{perteneceEjemplar:ejemplar._id} ">
-                <div class="image"><a href={{rutaPieza}}{{pieza._id}}{{pieza.imagenesPieza[0]}} data-fancybox="gallery" class="image">
-                  <img src={{rutaPieza}}{{pieza._id}}{{pieza.imagenesPieza[0]}} alt="..." class="img-fluid"></a>
+                  </div>
                 </div>
-                  <div class="title"><strong>Nro de Pieza: {{pieza.identificador}}</strong>
-                    <div class="d-flex align-items-center">
-                        <div class="date"><a (click)="openModal(templatePiezaDim)" ><i class="icon-clock"></i> Ingreso: {{pieza.fechaIngreso | date:'dd/MM/yyyy' }}
-                          <ng-template #templatePiezaDim>
-                            <div class="modal-header">
-                              <h4 class="modal-title pull-left">Dimensiones de pieza: {{pieza.identificador}}</h4>
-                              <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                              <li *ngIf= "pieza.medidasPieza.ancho > 0 "><strong>Ancho: </strong>{{pieza.medidasPieza.ancho}}</li>
-                              <li *ngIf= "pieza.medidasPieza.largo > 0"><strong>Largo: </strong> {{pieza.medidasPieza.largo}} </li>
-                              <li *ngIf= "pieza.medidasPieza.alto > 0"><strong>Alto: </strong>{{pieza.medidasPieza.alto}}</li>
-                              <li *ngIf= "pieza.medidasPieza.diametro > 0"><strong>Diámetro: </strong>{{pieza.medidasPieza.diametro}}</li>
-                              <li *ngIf= "pieza.medidasPieza.circunferencia > 0"><strong>Circunferencia: </strong>{{pieza.medidasPieza.circunferencia}}</li>
-                            </div>
-                          </ng-template>
-                        </a></div>
+              </div>
+              <!--No puede mostrar ningun Ejemplar en virtud de que la busqueda dio vacio -->
+              <div *ngIf="(ejemplares | filterBy:filtrado).length == 0">
+                <p tabindex="0" class="lead">La busqueda que planteo para los Ejemplares <strong>no dio</strong> resultado.</p>
+                <p tabindex="0" >Tenga en cuenta que esta buscando por <strong>Nombre </strong> del Ejemplar, replantee la busqueda. </p>
+              </div>
+              <!-- No puede mostrarse un Ejemplar en virtud de que la busqueda dio multiples resultados -->
+              <div *ngIf="(ejemplares | filterBy:filtrado).length > 1">
+                <p tabindex="0" class="lead">La busqueda que planteo para los Ejemplares <strong>dio varios </strong> resultados.</p>
+                <p tabindex="0" ><strong>Seleccione </strong> un Ejemplar de la siguiente lista o realice una nueva busqueda.</p>
+                <div *ngFor="let ejemplar of ejemplares| filterBy:filtrado | orderBy:['nombre'] ">
+                    <a (click)="setearFiltro(ejemplar.nombre)" (Keyup.enter)="setearFiltro(ejemplar.nombre)" >
+                        <h3 tabindex="0" class="h4">{{ejemplar.nombre | uppercase }}</h3>
+                    </a>
+                </div>
+              </div>
+            </div>
+            <!--Muestra los Ejemplares resumidos-->
+            <div *ngIf= "mostrarTodas" >
+              <div class="container">
+                <div class="row">
+                  <!-- Ejem nro 1 de la pagina -->
+                  <div *ngIf ="ejemplares?.length >= indicePagina+1" class="post col-xl-6">
+                    <div tabindex="0" class="post-thumbnail"><img src={{rutaEjem}}{{ejemplares[indicePagina]?._id}}{{ejemplares[indicePagina]?.ilustracionCompleta}}  alt={{ejemplares[indicePagina]?.descripcionIC}} class="img-fluid"></div>
+                    <div class="post-details">
+                      <div class="post-meta d-flex justify-content-between">
+                        <div tabindex="0" class="date meta-last">Especie: {{ejemplares[(indicePagina)]?.taxonEspecie}}</div>
+                        <div tabindex="0" class="category">Familia: {{ejemplares[(indicePagina)]?.taxonFamilia}}</div>
+                      </div><a (click)="setearFiltro(ejemplares[(indicePagina)]?.nombre)" (keyup.enter)="setearFiltro(ejemplares[(indicePagina)]?.nombre)" title="Link a información detallada del ejemplar seleccionado">
+                        <h2 tabindex="0" class="h4" ng-focus="link" >{{ejemplares[(indicePagina)]?.nombre | uppercase }}</h2></a>
+                        <p tabindex="0" class="text-muted">{{ejemplares[(indicePagina)]?.descripcion1}}</p>
                     </div>
                   </div>
+                  <!-- Ejem nro 2 de la pagina -->
+                  <div *ngIf ="ejemplares?.length >=indicePagina+2" class="post col-xl-6">
+                    <div tabindex="0" class="post-thumbnail"><img src={{rutaEjem}}{{ejemplares[indicePagina+1]?._id}}{{ejemplares[indicePagina+1]?.ilustracionCompleta}}  alt={{ejemplares[indicePagina+1]?.descripcionIC}} class="img-fluid"></div>
+                    <div class="post-details">
+                      <div class="post-meta d-flex justify-content-between">
+                        <div tabindex="0" class="date meta-last">Especie: {{ejemplares[(indicePagina+1)]?.taxonEspecie}}</div>
+                        <div tabindex="0" class="category">Familia: {{ejemplares[(indicePagina+1)]?.taxonFamilia}}</div>
+                      </div><a (click)="setearFiltro(ejemplares[(indicePagina+1)]?.nombre)" (Keyup.enter)="setearFiltro(ejemplares[(indicePagina+1)]?.nombre)"  title="Link a información detallada del ejemplar seleccionado">
+                        <h2 tabindex="0" class="h4">{{ejemplares[(indicePagina+1)]?.nombre | uppercase }}</h2></a>
+                      <p tabindex="0" class="text-muted">{{ejemplares[(indicePagina+1)]?.descripcion1}}</p>
+                    </div>
+                  </div>
+                </div>
+                <nav aria-label="Navegacion de páginas de Ejemplares">
+                  <div class="pagination pagination-template d-flex justify-content-center">
+                    <pagination [totalItems]="ejemplares.length" [itemsPerPage]="2" [(ngModel)]="currentPage"
+                    (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;" ></pagination>
+                  </div>            
+                </nav>
               </div>
+            </div>
+      </div>
+      <!--Si no hay Ejemplares -->
+      <div *ngIf = "ejemplares?.length == 0" >
+          <div class="post blog-post col-lg-8"> 
+              <div class="post-thumbnail"><img  src="assets/datos/ejemplares/portada.jpg" alt="Portada general, sin ejemplares todavia" class="img-fluid"></div>            
+          </div>
+      </div>
+    </main>
+    <!-- Muestra el lateral segun todos o no  y si existen ejemplares-->
+    <aside class="col-lg-4" *ngIf = "ejemplares?.length > 0" >
+      <!-- Barra de Busqueda de Ejemplares--> 
+      <div class="widget search" *ngIf=mostrarTodas>
+        <h3 tabindex="0" class="h5">Buscar Ejemplares:</h3>
+        <div class="search-form">
+          <div class="form-group">
+            <input tabindex="0" type="search" placeholder="Nombre del Ejemplar?"  [(ngModel)]= filtrado.nombre name="buscaNombreEjem" aria-label="Para ingresar nombre de ejemplar Ejemplar">
+            <button tabindex="0" type="submit" class="submit" (click)="mostrarEjem()" (keyup.enter)="mostrarEjem()" aria-label="buscar Ejemplar" ><i class="icon-search" role="button" ></i></button>
           </div>
         </div>
-        <!-- Widget [Videos]-->        
-          <div  *ngFor="let ejemplar of ejemplares | filterBy:filtrado | orderBy:['nombre'] ">
-            <div class="widget categories" *ngIf= "!mostrarTodas && (ejemplar.videosEjemplar.length > 0) ">
-              <header>
-                <h3 class="h6">Videos del Ejemplar: </h3>
-              </header>            
-                <video 
-                  src={{rutaEjem}}{{ejemplar._id}}{{ejemplar.videosEjemplar[indiceVideo]}} width="240" height="160"  controls muted preload></video>
-                <nav aria-label="Page navigation videos" *ngIf="ejemplar.videosEjemplar.length > 0">
-                    <div class="pagination pagination-template d-flex justify-content-center">
-                      <pagination [totalItems]="ejemplar.videosEjemplar.length" [itemsPerPage]="1" [(ngModel)]="currentVideo"
-                      (pageChanged)="videoChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;" ></pagination>
-                    </div>
-                </nav>  
+      </div>
+      <div class="widget search" *ngIf=!mostrarTodas>
+          <h3 tabindex="0" class="h6">Mostrar Todos los Ejemplares</h3>
+          <div class="search-form">
+            <div class="form-group">
+              <input type="text" placeholder="Haga click en la lupa" readonly aria-label="Haga click en la lupa">
+              <button tabindex="0" type="submit" class="submit" (click)="mostrarEjem()" (keyup.enter)="mostrarEjem()" aria-label="Ver Todos los Ejemplares" ><i class="icon-search"></i></button>
             </div>
           </div>
-        <!-- Widget [Las bochones asociadas]-->
-        <div class="widget tags" *ngIf="!mostrarTodas && (bochones.length > 0)">       
-          <header>
-            <h3 class="h6">Bochones:</h3> 
-          </header>
-          <ul class="list-inline" *ngFor="let ejemplar of ejemplares | filterBy:filtrado | orderBy:['nombre'] " >
-            <li class="list-inline-item" *ngFor="let bochon of bochones | filterBy:{ejemplarAsociado:ejemplar._id} " >
-              <a (click)="openModal(template)" class="tag">Bochon: {{bochon.nombre}}</a>
-              <ng-template #template>
-                  <div class="modal-header">
-                    <h4 class="modal-title pull-left">Bochon: {{bochon.nombre}}</h4>
-                    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <li><strong>Nro de Campo: </strong>{{bochon.nroCampo}}</li>
-                    <li><strong>Preparador: </strong> {{bochon.preparador}} </li>
-                    <li><strong>Preparación: </strong>{{bochon.tipoPreparacion}}</li>
-                    <li><strong>Acidos Aplicados: </strong> 
+        </div>
+      <!-- Las Piezas Asociadas     -->
+      <div class="widget latest-posts" *ngIf="!mostrarTodas && (piezas.length >0) && (ejemplares | filterBy:filtrado).length == 1 " >
+        <h3 tabindex="0" class="h5">Piezas:</h3>
+        <div class="blog-posts" *ngFor="let ejemplar of ejemplares | filterBy:filtrado | orderBy:['nombre'] " >
+            <div class="item d-flex align-items-center" *ngFor="let pieza of piezas | filterBy:{perteneceEjemplar:ejemplar._id} ">
+              <div tabindex="0" class="image"><a href={{rutaPieza}}{{pieza._id}}{{pieza.imagenesPieza[0].nombre}} title={{pieza.imagenesPieza[0].descripcion}} data-fancybox="gallery" class="image">
+                <img src={{rutaPieza}}{{pieza._id}}{{pieza.imagenesPieza[0].nombre}} alt={{pieza.imagenesPieza[0].descripcion}} class="img-fluid"></a>
+              </div>
+              <div tabindex="0" class="title"><strong>Nro de Pieza: {{pieza.identificador}}</strong>
+                <div tabindex="0" class="h6">Ingreso: {{pieza.fechaIngreso | date:'dd/MM/yyyy' }}</div> 
+                <ul tabindex="0" class="list-inline"><strong>Dimensiones de la Pieza:</strong>
+                  <li tabindex="0" class="list-inline-item" *ngIf= "pieza.medidasPieza.ancho > 0 ">Ancho: {{pieza.medidasPieza.ancho}}</li>
+                  <li tabindex="0"class="list-inline-item" *ngIf= "pieza.medidasPieza.largo > 0">Largo: {{pieza.medidasPieza.largo}} </li>
+                  <li tabindex="0"class="list-inline-item" *ngIf= "pieza.medidasPieza.alto > 0">Alto: {{pieza.medidasPieza.alto}}</li>
+                  <li tabindex="0"class="list-inline-item" *ngIf= "pieza.medidasPieza.diametro > 0">Diámetro: {{pieza.medidasPieza.diametro}}</li>
+                  <li tabindex="0"class="list-inline-item" *ngIf= "pieza.medidasPieza.circunferencia > 0">Circunferencia: {{pieza.medidasPieza.circunferencia}}</li>
+                </ul>   
+              </div>  
+            </div>
+        </div>
+      </div>
+      <!-- Videos Asociados    -->        
+      <div  *ngFor="let ejemplar of ejemplares | filterBy:filtrado | orderBy:['nombre'] ">
+        <div class="widget categories" *ngIf= "!mostrarTodas && (ejemplar.videosEjemplar.length > 0)  && (ejemplares | filterBy:filtrado).length == 1 ">
+          <h3 tabindex="0" class="h5">Videos del Ejemplar: </h3>       
+          <video 
+            src={{rutaEjem}}{{ejemplar._id}}{{ejemplar.videosEjemplar[indiceVideo]}} width="240" height="160"  controls muted preload></video>
+          <nav aria-label="Page navigation videos" *ngIf="ejemplar.videosEjemplar.length > 0">
+              <div class="pagination pagination-template d-flex justify-content-center">
+                <pagination [totalItems]="ejemplar.videosEjemplar.length" [itemsPerPage]="1" [(ngModel)]="currentVideo"
+                (pageChanged)="videoChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;" ></pagination>
+              </div>
+          </nav>  
+        </div>
+      </div>
+      <!--Bochones Asociados]-->
+      <div class="widget tags" *ngIf="!mostrarTodas && (bochones.length > 0)  && (ejemplares | filterBy:filtrado).length == 1 ">       
+        <h3 tabindex="0" class="h5">Bochones:</h3> 
+        <div class="blog-posts" *ngFor="let ejemplar of ejemplares | filterBy:filtrado | orderBy:['nombre'] " >
+          <ul  *ngFor="let bochon of bochones | filterBy:{ejemplarAsociado:ejemplar._id} " >              
+            <accordion>
+                <accordion-group heading={{bochon.nombre}} tabindex="0" (keyup.enter)="isOpen = !isOpen" [isOpen]="isOpen" >
+                    <h3 tabindex="0" class="h6"><strong>CLASIFICACION DETALLADA DEL BOCHON:</strong></h3>
+                    <li tabindex="0"><strong>Nro de Campo: </strong>{{bochon.nroCampo}}</li>
+                    <li tabindex="0"><strong>Preparador: </strong> {{bochon.preparador}} </li>
+                    <li tabindex="0"><strong>Preparación: </strong>{{bochon.tipoPreparacion}}</li>
+                    <li tabindex="0"><strong>Acidos Aplicados: </strong> 
                       <div *ngFor="let acido of bochon.acidosAplicados">
-                        <li  align="center"  >{{acido}}</li> 
+                        <li tabindex="0" align="center"  >{{acido}}</li> 
                       </div>  
                     </li>
-                  </div>
-                </ng-template>
-            </li>
-          </ul>
-        </div>
-      </aside>
-    </div>
-</div>
-<!--Si no hay Ejemplares -->
-<div *ngIf = "ejemplares?.length == 0" class="container">
-  <div class="row">
-    <div class="post blog-post col-lg-8"> 
-        <div class="post-thumbnail"><img  src="assets/datos/ejemplares/portada.jpg" alt="..." class="img-fluid"></div>            
-    </div>
+                </accordion-group>
+              </accordion>
+            </ul>
+          </div>
+      </div>        
+    </aside>
   </div>
 </div>
