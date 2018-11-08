@@ -1,0 +1,148 @@
+ <title>Página Principal del Museo donde se expone topico generales</title>
+ <html lang="es"> 
+
+ <!-- Section de Imagen en background y titulo TABINDEX 1 -->
+  <section style="background: url(assets/datos/home/portada.jpg); background-size: cover; background-position: center center" class="hero">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7">
+          <h1 tabindex="0" >{{infoHome[0]?.tituloMuseo}}</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Section de Introduccion TABINDEX 2 a 3-->
+  <section class="intro">
+    <div class="container">
+        <div class="row">
+        <div class="col-lg-8">
+            <h2 tabindex="0" class="h3">{{infoHome[0]?.tituloIntroduccion}}</h2>
+            <p tabindex="0" class="text-big">{{infoHome[0]?.introduccion}}</p>
+        </div>
+        </div>
+    </div>
+  </section>
+  <!-- Seccion de las Excavaciones importantes marcadas para verse en el Home TABINDEX 4 a 15 -->
+  <section class="featured-posts no-padding-top">
+    <div *ngIf ="excavacionesHome.length > 0" class="container">
+      <!-- Excavacion 1 -->
+      <div *ngIf ="excavacionesHome.length > 0 " class="row d-flex align-items-stretch">
+        <div class="text col-lg-7">
+          <div class="text-inner d-flex align-items-center">
+            <div class="content">
+              <header class="post-header">
+                <div tabindex="0" class="category"><strong>FECHA INICIO: </strong>{{excavacionesHome[0]?.fechaInicio | date:'dd/MM/yyyy' }} <strong>AREA: </strong>{{excavacionesHome[0]?.area}}</div>
+                <a tabindex="0" [routerLink]="['/excavacion']" [routerLinkActive]="['activado']" title="Link a la página principal de las Excavaciones"><h3 class="h4">{{excavacionesHome[0]?.nombre | uppercase }}</h3></a>
+              </header>
+                <p tabindex="0">{{excavacionesHome[0]?.descripcion}}</p>
+              <div class="post-footer d-flex align-items-center"><a class="author d-flex align-items-center flex-wrap">
+                <div tabindex="0" class="title"><span><strong>Director: </strong> {{excavacionesHome[0]?.director}}</span></div></a>
+                <div tabindex="0" class="date"><i class="icon-clock"></i> {{excavacionesHome[0]?.fechaInicio | date:'dd/MM/yyyy' }} </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div tabindex="0" class="image col-lg-5"><img src={{rutaExca}}{{excavacionesHome[0]?._id}}{{excavacionesHome[0]?.fotosExcavacion[0].nombre}} alt={{excavacionesHome[0]?.fotosExcavacion[0].descripcion}} ></div>
+      </div>
+      <!-- Excavacion 2   -->
+      <div *ngIf = "excavacionesHome.length > 1 " class="row d-flex align-items-stretch">
+        <div tabindex="0" class="image col-lg-5"><img src={{rutaExca}}{{excavacionesHome[1]?._id}}{{excavacionesHome[1]?.fotosExcavacion[0].nombre}} alt={{excavacionesHome[1]?.fotosExcavacion[0].descripcion}} ></div>
+        <div class="text col-lg-7">
+          <div class="text-inner d-flex align-items-center">
+            <div class="content">
+              <div class="post-header">
+                <div tabindex="0" class="category"><strong>FECHA INICIO: </strong>{{excavacionesHome[1]?.fechaInicio | date:'dd/MM/yyyy' }}<strong>AREA: </strong> {{excavacionesHome[1]?.area}}</div>
+                <a tabindex="0" [routerLink]="['/excavacion']" [routerLinkActive]="['activado']" title="Link a la página principal de las Excavaciones"><h3 class="h4">{{excavacionesHome[1]?.nombre | uppercase }}</h3></a>
+              </div>
+              <p tabindex="0" >{{excavacionesHome[1]?.descripcion}}</p>
+              <div class="post-footer d-flex align-items-center"><a class="author d-flex align-items-center flex-wrap">
+                <div tabindex="0" class="title"><span><strong>Director: </strong>{{excavacionesHome[1]?.director}}</span></div></a>
+                <div tabindex="0" class="date"><i class="icon-clock"></i> {{excavacionesHome[1]?.fechaInicio | date:'dd/MM/yyyy' }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Divider Section Divison en background y frase TABINDEX 16 -->
+  <section style="background: url(assets/datos/home/divisor.jpg); background-size: cover; background-position: center bottom" class="divider">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7">
+          <h1 tabindex="0" >{{infoHome[0]?.objetivoMuseo}}</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Algunos Ejemplares que fueron marcados para mostrarse en el home  TABINDEX 17 a 33-->
+  <section class="latest-posts" *ngIf="ejemplaresHome.length >0"> 
+    <div class="container"> 
+      <h2 tabindex="0" >Los últimos ejemplares hallados...</h2>
+      <p tabindex="0" class="text-big">{{infoHome[0]?.significadoHallazgo}}</p>
+      <div class="row" >
+        <!-- Muestra el Ejemplar priorizado como 1 -->
+        <div class="post col-md-4" *ngIf="ejemplaresHome.length > 0" >
+          <div tabindex="0" class="post-thumbnail"><img src={{rutaEjem}}{{ejemplaresHome[0]?._id}}{{ejemplaresHome[0]?.ilustracionCompleta}} alt={{ejemplaresHome[0]?.descripcionIC}} class="img-fluid"></div>
+          <div class="post-details">
+            <div class="post-meta d-flex justify-content-between">
+              <div tabindex="0" class="date">Ingreso:  {{ejemplaresHome[0]?.fechaIngresoColeccion | date:'dd/MM/yyyy'}}</div>
+              <div tabindex="0" class="category">Coleccion:{{ejemplaresHome[0]?.nroColeccion}}</div>
+            </div>
+            <a tabindex="0" [routerLink]="['/ejemplar']" [routerLinkActive]="['activado']" title="Link a la pagina principal de los Ejemplares"><h3 class="h4">{{ejemplaresHome[0]?.nombre}}:{{ejemplaresHome[0]?.periodo}}</h3></a>
+            <p tabindex="0" class="text-muted">{{ejemplaresHome[0]?.descripcion1}}</p>
+          </div>
+        </div>
+        <!-- Muestra el Ejemplar priorizado como 2 -->
+        <div class="post col-md-4"  *ngIf="ejemplaresHome.length > 1" >
+          <div tabindex="0" class="post-thumbnail"><img src={{rutaEjem}}{{ejemplaresHome[1]?._id}}{{ejemplaresHome[1]?.ilustracionCompleta}} alt={{ejemplaresHome[1]?.descripcionIC}} class="img-fluid"></div>
+          <div class="post-details">
+            <div class="post-meta d-flex justify-content-between">
+              <div tabindex="0" class="date">Ingreso:  {{ejemplaresHome[1]?.fechaIngresoColeccion | date:'dd/MM/yyyy'}}</div>
+              <div tabindex="0" class="category">Coleccion:{{ejemplaresHome[1]?.nroColeccion}}</div>
+            </div>
+            <a tabindex="0" [routerLink]="['/ejemplar']" [routerLinkActive]="['activado']" title="Link a la página principal de los Ejemplares"><h3 class="h4">{{ejemplaresHome[1]?.nombre}}:{{ejemplaresHome[1]?.periodo}}</h3></a>
+            <p tabindex="0" class="text-muted">{{ejemplaresHome[1]?.descripcion1}}</p>
+          </div>
+        </div>
+        <!-- Muestra el Ejemplar priorizado como 3 -->
+        <div class="post col-md-4"  *ngIf="ejemplaresHome.length > 2">
+          <div tabindex="0" class="post-thumbnail"><img src={{rutaEjem}}{{ejemplaresHome[2]?._id}}{{ejemplaresHome[2]?.ilustracionCompleta}} alt={{ejemplaresHome[2]?.descripcionIC}} class="img-fluid"></div>
+          <div class="post-details">
+            <div class="post-meta d-flex justify-content-between">
+              <div tabindex="0" class="date">Ingreso:{{ejemplaresHome[2]?.fechaIngresoColeccion | date:'dd/MM/yyyy'}}</div>
+              <div tabindex="0" class="category">Coleccion:{{ejemplaresHome[2]?.nroColeccion}}</div>
+            </div>
+            <a tabindex="0" [routerLink]="['/ejemplar']" [routerLinkActive]="['activado']" title="Link a la página principal de los Ejemplares"><h3 class="h4">{{ejemplaresHome[2]?.nombre}}:{{ejemplaresHome[2]?.periodo}}</h3></a>
+            <p tabindex="0" class="text-muted">{{ejemplaresHome[2]?.descripcion1}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+   <!-- Gallery Section // galeria de fotos TABINDEX  34 a 37-->
+  <section class="gallery no-padding">    
+    <div class="row">
+      <div class="mix col-lg-3 col-md-3 col-sm-6">
+        <div class="item"><a href={{rutaHome}}{{infoHome[0]?.fotosHome[0].nombre}} data-fancybox="gallery" class="image">
+          <img tabindex="0" src={{rutaHome}}{{infoHome[0]?.fotosHome[0].nombre}} alt={{infoHome[0]?.fotosHome[0].descripcion}} class="img-fluid">
+            <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+      </div>
+      <div class="mix col-lg-3 col-md-3 col-sm-6">
+          <div class="item"><a href={{rutaHome}}{{infoHome[0]?.fotosHome[1].nombre}} data-fancybox="gallery" class="image">
+            <img tabindex="0" src={{rutaHome}}{{infoHome[0]?.fotosHome[1].nombre}} alt={{infoHome[0]?.fotosHome[1].descripcion}} class="img-fluid">
+              <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+        </div>
+      <div class="mix col-lg-3 col-md-3 col-sm-6">
+          <div class="item"><a href={{rutaHome}}{{infoHome[0]?.fotosHome[2].nombre}} data-fancybox="gallery" class="image">
+            <img tabindex="0" src={{rutaHome}}{{infoHome[0]?.fotosHome[2].nombre}} alt={{infoHome[0]?.fotosHome[2].descripcion}} class="img-fluid">
+              <div  class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+        </div>
+      <div class="mix col-lg-3 col-md-3 col-sm-6">
+          <div class="item"><a href={{rutaHome}}{{infoHome[0]?.fotosHome[3].nombre}} data-fancybox="gallery" class="image">
+            <img tabindex="0" src={{rutaHome}}{{infoHome[0]?.fotosHome[3].nombre}} alt={{infoHome[0]?.fotosHome[3].descripcion}} class="img-fluid">
+              <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+        </div>
+    </div>
+  </section>
+
