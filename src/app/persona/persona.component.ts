@@ -4,9 +4,7 @@ import {Persona} from './persona';
 import {PersonaService} from '../services/persona.service';
 import {ExcavacionService} from '../services/excavacion.service';
 import { Pipe, PipeTransform } from '@angular/core';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-
+import {config} from '../config';
 
 @Component({
     selector:'Personas',
@@ -16,7 +14,6 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 export class PersonasComponent{
     public personas;
-    public curriculumRuta: string;
     public fotoRuta: string;
     public rutaExca:string;
     public busqueda: boolean;
@@ -29,14 +26,11 @@ export class PersonasComponent{
     public indicePagina:number;
     public currentPage:number;
     public page: number;
-    modalRef: BsModalRef;
 
     constructor(private _peticionesService: PersonaService, 
-                private _peticionesExcaService: ExcavacionService,
-                private modalService: BsModalService){
-        this.curriculumRuta='assets/datos/personal/curriculumPersonal/';
-        this.fotoRuta='assets/datos/personal/fotosPersonal/';
-        this.rutaExca= 'assets/datos/excavaciones/';
+                private _peticionesExcaService: ExcavacionService){
+        this.fotoRuta=config.rutaPersonalFoto;
+        this.rutaExca=config.rutaExca;
         this.personas = [];
         this.excaDirige = [];
         this.excaPaleo = [];
@@ -60,14 +54,12 @@ ngOnInit(){
 }
 
 buscaExca(persona) {
-    console.log("Entramos a buscar con la persona cuyo id es: "+persona);
     this.excaDirige = [];
     this.excaPaleo = [];
     this.excaColec = [];
     this.buscaExcaDirige(persona);
     this.buscaExcaPaleontologo(persona);
     this.buscaExcaColector(persona);
-    console.log("Salimos del Buscar excavaciones que tiene a cargo "+ persona);
 }
 private buscaExcaDirige(persona) {
     this._peticionesExcaService.getExcavacionesDirector(persona).subscribe(
@@ -112,7 +104,5 @@ mostrarPersona(){
     this.indicePagina=0;
     //this.indiceVideo=0;
 }
-openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-  }
+
 }

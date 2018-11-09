@@ -5,7 +5,7 @@ import { EjemplarService } from '../services/ejemplar.service';
 import {HomeService } from '../services/home.service';
 import { Pipe, PipeTransform } from '@angular/core';
 
-//const config = require('../config');
+import {config} from '../config';
 
 
 @Component({
@@ -27,9 +27,9 @@ export class HomeComponent {
                 private _peticionesEjemService: EjemplarService,
                 private _peticionesHome: HomeService){
         this.excavacionesHome=[];
-        this.rutaExca ='assets/datos/excavaciones/';
-        this.rutaEjem='assets/datos/ejemplares/';
-        this.rutaHome='assets/datos/home/';
+        this.rutaExca =config.rutaExca;
+        this.rutaEjem=config.rutaEjem;
+        this.rutaHome=config.rutaHome;
         this.ejemplaresHome=[];
         this.infoHome=[];
         }
@@ -70,7 +70,6 @@ private obtenerEjemHome(){
 private obtenerInfoHome(){
     this._peticionesHome.getInfoHome().subscribe(
         result => {
-            console.log("infoHome es"+result);
             this.infoHome= result;
             if(!this.infoHome){
                 console.log("Error al tratar de recuperar la informacion general del Home"+ result);

@@ -5,6 +5,8 @@ import {EjemplarService} from '../services/ejemplar.service';
 import {PiezaService} from '../services/pieza.service';
 import {BochonService} from '../services/bochon.service';
 
+import {config} from '../config';
+
 @Component({
     selector:'Ejemplares',
     templateUrl:'./ejemplar.component.html',
@@ -33,8 +35,8 @@ export class EjemplaresComponent {
         this.piezas=[];
         this.bochones=[];
         this.filtrado = {nombre:''};
-        this.rutaEjem='assets/datos/ejemplares/';
-        this.rutaPieza='assets/datos/piezas/';
+        this.rutaEjem=config.rutaEjem;
+        this.rutaPieza=config.rutaPieza;
         this.mostrarTodas=true;
         this.indicePagina=0;
         this.currentPage=1;

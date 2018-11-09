@@ -3,15 +3,9 @@ import {Observable} from 'rxjs/Observable';
 import {Excavacion} from './excavacion';
 import {ExcavacionService} from '../services/excavacion.service';
 import {PersonaService} from '../services/persona.service';
-//import {PaginationModule} from 'ngx-bootstrap';
 import { BochonService } from '../services/bochon.service';
 import { EjemplarService } from '../services/ejemplar.service';
-
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-
-
-//const config = require('../config');
+import {config} from '../config';
 
 @Component({
     selector:'Excavaciones',
@@ -33,7 +27,6 @@ export class ExcavacionesComponent {
     public bochones;
     public ejemplares;
     public unico: boolean;
-    public curriculumRuta;
     public fotoRuta;    
     public indicePagina:number;
     public currentPage:number;
@@ -42,7 +35,6 @@ export class ExcavacionesComponent {
     public currentVideo;
     public indiceVideo;
     private excaElegida;
-    modalRef: BsModalRef;
     public mostrarEjemplares:boolean;
     private ejemUnico;
     public  isCollapsed: boolean;
@@ -52,12 +44,10 @@ export class ExcavacionesComponent {
     constructor(private _peticionesService: ExcavacionService, 
                 private _peticionesPerService: PersonaService,
                 private _peticionesBochonService: BochonService,
-                private _peticionesEjemplarService: EjemplarService,
-                private modalService: BsModalService ){
-        this.rutaExca= 'assets/datos/excavaciones/';
-        this.curriculumRuta='assets/datos/personal/curriculumPersonal/';
-        this.fotoRuta='assets/datos/personal/fotosPersonal/';
-        this.rutaEjem='assets/datos/ejemplares/';
+                private _peticionesEjemplarService: EjemplarService){
+        this.rutaExca=config.rutaExca;
+        this.fotoRuta=config.rutaPersonalFoto;
+        this.rutaEjem=config.rutaEjem;
         this.excavaciones=[];
         this.filtrado = {nombre:''};
         this.indicePagina=0;
@@ -97,7 +87,6 @@ obtenerExcavaciones(){
 obtenerDirectores(){
     for (let index = 0; index < this.excavaciones.length; index++) {
         const excavacion = this.excavaciones[index];
-        //console.log("Excavacion "+index+" tiene: "+excavacion.directorId);
         this._peticionesPerService.getPersonaId(excavacion.directorId).subscribe(
             result => {
                 let director = result;
@@ -110,7 +99,6 @@ obtenerDirectores(){
 obtenerPaleontologos(){
     for (let index = 0; index < this.excavaciones.length; index++) {
         const excavacion = this.excavaciones[index];
-        //console.log("Excavacion "+index+" tiene: "+excavacion.paleontologo);
         this._peticionesPerService.getPersonaId(excavacion.paleontologo).subscribe(
             result => {
                 let paleontologo = result;
@@ -123,7 +111,6 @@ obtenerPaleontologos(){
 obtenerColectores(){
     for (let index = 0; index < this.excavaciones.length; index++) {
         const excavacion = this.excavaciones[index];
-        //console.log("Excavacion "+index+" tiene: "+excavacion.colector);
         this._peticionesPerService.getPersonaId(excavacion.colector).subscribe(
             result => {
                 let colector = result;
@@ -183,10 +170,8 @@ obtenerEjemplaresAsociados(){
 }
 existePersonal(idPersona){
     let esta=false;
-    console.log("Existe: "+ idPersona + " en personal de longitud :"+this.personal.length);
     for(let index = 0; index < this.personal.length; index++) {
         const element = this.personal[index];
-        console.log(" PERSONAL: element._id");
         if(element._id==idPersona){
             esta=true;
             index = this.personal.length;
@@ -268,8 +253,5 @@ setearFiltro(param){
     if(!this.mostrarTodas) {this.mostrarTodas=true;}
     this.mostrarExca();
 }
-openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-  }
 
 }
