@@ -126,7 +126,7 @@
       <!--Si no hay Ejemplares -->
       <div *ngIf = "ejemplares?.length == 0" >
           <div class="post blog-post col-lg-8"> 
-              <div class="post-thumbnail"><img  src="assets/datos/ejemplares/portada.jpg" alt="Portada general, sin ejemplares todavia" class="img-fluid"></div>            
+              <div class="post-thumbnail"><img  src="assets/datos/ejemplares/portada.jpg" alt="Portada general, SIN ejemplares todavia" class="img-fluid"></div>            
           </div>
       </div>
     </main>
@@ -161,6 +161,7 @@
               </div>
               <div tabindex="0" class="title"><strong>Nro de Pieza: {{pieza.identificador}}</strong>
                 <div tabindex="0" class="h6">Ingreso: {{pieza.fechaIngreso | date:'dd/MM/yyyy' }}</div> 
+                <div tabindex="0" class="h6">Origen: {{pieza.origen}}</div>
                 <ul tabindex="0" class="list-inline"><strong>Dimensiones de la Pieza:</strong>
                   <li tabindex="0" class="list-inline-item" *ngIf= "pieza.medidasPieza.ancho > 0 ">Ancho: {{pieza.medidasPieza.ancho}}</li>
                   <li tabindex="0"class="list-inline-item" *ngIf= "pieza.medidasPieza.largo > 0">Largo: {{pieza.medidasPieza.largo}} </li>
@@ -171,6 +172,7 @@
               </div>  
             </div>
         </div>
+        
       </div>
       <!-- Videos Asociados    -->        
       <div  *ngFor="let ejemplar of ejemplares | filterBy:filtrado | orderBy:['nombre'] ">
@@ -186,7 +188,7 @@
           </nav>  
         </div>
       </div>
-      <!--Bochones Asociados]-->
+      <!--Bochones Asociados    -->
       <div class="widget tags" *ngIf="!mostrarTodas && (bochones.length > 0)  && (ejemplares | filterBy:filtrado).length == 1 ">       
         <h3 tabindex="0" class="h5">Bochones:</h3> 
         <div class="blog-posts" *ngFor="let ejemplar of ejemplares | filterBy:filtrado | orderBy:['nombre'] " >
@@ -201,6 +203,9 @@
                       <div *ngFor="let acido of bochon.acidosAplicados">
                         <li tabindex="0" align="center"  >{{acido}}</li> 
                       </div>  
+                      <div *ngFor="let pieza of piezas | filterBy:{_id:bochon.piezaId} ">
+                        <li tabindex="0"><strong>Contiene pieza: </strong>{{pieza.identificador}}</li>
+                      </div>
                     </li>
                 </accordion-group>
               </accordion>

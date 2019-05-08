@@ -8,8 +8,5 @@ export class Persona {
         foto: String, // foto de la persona es un archivo.jpg donde se almacenan todas las fotos de les personas
         fechaBaja: Date,
         motivoBaja:String,
-        director:[String],
-        paleontologo: [String],
-        colector: [String]
     ){}
 }

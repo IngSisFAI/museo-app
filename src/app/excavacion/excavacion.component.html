@@ -118,13 +118,13 @@
                 <!--Muestra las descripcion de la excavacion y si tuviera los ejemplares -->
                   <div class="widget tags"> 
                     <h3 tabindex="0" class="lead">{{excavacion.descripcion}}</h3>   
-                    <h4 *ngIf="bochones.length > 0" tabindex="0" class="lead">Ejemplares Asociados:</h4>
-                    
-                    <h5 *ngIf="bochones.length > 0"  tabindex="0" class="lead">Los ejemplares asociados son aquellos que se han encontrado en la zona de la excavacion, sustentado sobre los restos hallados que estan plasmados en los bochones asociados.</h5>
-                    <div *ngIf="bochones.length > 0" > <a tabindex="0" (click)="elimEjemDupli()" (keyup.enter)="elimEjemDupli()" class="tag" role="button" >Ver Ejemplares</a></div>
+                    <h4 *ngIf="ejemplares.length > 0" tabindex="0" class="lead">Ejemplares Asociados:</h4>                    
+                    <h5 *ngIf="ejemplares.length > 0"  tabindex="0" class="lead">Los ejemplares asociados son aquellos que, se han encontrado en la zona de la excavacion, sustentado sobre los restos hallados que estan plasmados en los bochones asociados, o por donación de piezas .</h5>
+                    <div *ngIf="ejemplares.length > 0" > <a tabindex="0" (click)="elimEjemDupli()" (keyup.enter)="elimEjemDupli()" class="tag" role="button" >Ver Ejemplares</a></div>
                     <div *ngIf ="mostrarEjemplares">
-                      <div *ngFor="let bochon of bochones ">
-                        <ul class="list-inline" *ngFor="let ejemplar of ejemplares | filterBy:{_id:bochon.ejemplarAsociado} ">
+                      <!--<div *ngFor="let bochon of bochones ">-->
+
+                        <ul class="list-inline" *ngFor="let ejemplar of ejemplares  ">
                           <accordion role="presentation">
                             <accordion-group tabindex="0" heading={{ejemplar.nombre}} role="heading" (keyup.enter)="isOpen = !isOpen" [isOpen]="isOpen" >
                                 <h3 tabindex="0" class="h6"><strong>CLASIFICACION DETALLADA DEL EJEMPLAR:</strong></h3>
@@ -147,8 +147,8 @@
                                 <li tabindex="0"><strong>Ciudad: </strong>{{ejemplar.areaHallazgo[0].ciudad}}</li>
                             </accordion-group>
                           </accordion>
-                        </ul>
-                      </div>
+                        </ul>                        
+                      <!--</div>-->
                     </div>
                   </div>
                   <div class="post-body">                                
@@ -266,7 +266,7 @@
                       <br>
                     <!--Muestra el personal de la excavacion si lo tiene -->
                     <div class="widget tags" >
-                      <h3 class="h3">PERSONAL DE LA EXCAVACION: </h3>
+                      <h2 class="h3">PERSONAL DE LA EXCAVACION: </h2>
                       <div *ngFor = "let excavacion of excavaciones | filterBy:filtrado">
                         <div class="widget tags" *ngFor ="let persona of personal | filterBy:{_id:excavacion.directorId} ">                        
                           <h3 tabindex="0" class="h4">Director de Excavación: </h3>
@@ -316,8 +316,10 @@
         <h3 tabindex="0" class="h6">Buscar Excavaciones</h3>
         <div class="search-form">
           <div class="form-group">
-            <input tabindex="0" type="search" placeholder="Nombre de la Excavación?" [(ngModel)]= filtrado.nombre  name="buscaNombreExca" aria-label="Nombre de la exavacion a buscar" >
-            <button tabindex="0" role="button" type="submit" class="submit" (click)="mostrarExca()" name="buscar Excavacion" aria-label="buscar Excavacion"><i class="icon-search"></i></button>
+            <input tabindex="0" type="search" placeholder="Nombre de la Excavación?" [(ngModel)]= filtrado.nombre  name="buscaNombreExca" 
+            aria-label="Nombre de la exavacion a buscar" title="Permite buscar una exavación particular">
+            <button tabindex="0" role="button" type="submit" class="submit" (click)="mostrarExca()" name="buscar Excavacion" 
+            aria-label="buscar Excavacion"><strong class="icon-search"></strong></button>
           </div>
         </div>
       </div>
@@ -325,8 +327,10 @@
         <h3 tabindex="0" class="h6">Mostrar Todas las Excavaciones</h3>
         <div class="search-form">
           <div class="form-group">
-            <input tabindex="0" type="text" placeholder="Haga click en la lupa o Enter" readonly name="vertodaslasExcavacion" aria-label="Ver todas las Excavaciones" aria-readonly="true" >
-            <button tabindex="0" role="button" type="submit" class="submit" (click)="mostrarExca()" name="ver todas las Excavacion" aria-label="ver todas las Excavaciones" ><i class="icon-search"></i></button>
+            <input tabindex="0" type="text" placeholder="Haga click en la lupa o Enter" readonly name="vertodaslasExcavacion" 
+            aria-label="Ver todas las Excavaciones" aria-readonly="true"  title="Permite volver a ver todas las excavaciones." label="Permite volver a ver todas las excavaciones solo ....">
+            <button tabindex="0" role="button" type="submit" class="submit" (click)="mostrarExca()" name="ver todas las Excavacion" 
+            aria-label="ver todas las Excavaciones" ><strong class="icon-search"></strong></button>
           </div>
         </div>
       </div>
@@ -378,7 +382,7 @@
           </ul>
         </div>
         <div *ngIf="bochones.length ==0" >
-            <p>No hay <strong> BOCHONES </strong>asociados a la Excavación, por lo tanto tampoco hay <strong>EJEMPLARES</strong></p>
+            <p>No hay <strong> BOCHONES </strong>asociados a la Excavación</p>
         </div>
       </div>
     </aside>

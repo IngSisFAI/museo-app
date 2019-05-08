@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Productos Angular';
+  title = 'Componentes del Museo de Geología y Paleontología de la UNCo';
 }

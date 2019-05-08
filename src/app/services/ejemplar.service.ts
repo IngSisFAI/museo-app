@@ -24,5 +24,8 @@ getEjemplarId(idEjemplar):Observable<any>{
 getEjemHome(idEjemplar):Observable<any>{
     return this._http.get(this.url+"ejemplarHome/"+idEjemplar).map(res=>res.json().ejemplar);
 }
+getEjemExca(idExcavacion):Observable<any>{
+    return this._http.get(this.url+"ejemplarExca/"+idExcavacion).map(res=>res.json().ejemplar);
+}
 
 }

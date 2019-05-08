@@ -17,10 +17,12 @@ export class Ejemplar{
             era:String    
         }],
         ilustracionCompleta:String,
+        descripcionIC:String,
         areaHallazgo:[{
             nombreArea:String,
             pais:String,
-            ciudad:String
+            ciudad:String,
+            provincia:String
         }],
         nroColeccion:String,
         bochonesAsociados:[String],

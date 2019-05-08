@@ -1714,7 +1714,38 @@ STYLE SWITCHER FOR DEMO
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
 }
+/*---------------------boton---------------------------*/
 
+.button-backtotop {
+  position: fixed;
+  cursor: pointer;
+  bottom: 16px;
+  right: 16px;
+  left: auto;
+  &:dir(rtl) {
+    right: auto;
+    left: 16px;
+  }
+  opacity: 0.85;
+  /*border-radius: 100px;*/
+  border-color: #999;
+  /*background-color: var(--w3c-blue);
+  border-color: var(--w3c-blue);*/
+  box-shadow:  0 0 0 3px rgba(153, 153, 153, 0.25);
+  opacity: 0;
+  transition: opacity .5s linear;
+  &:focus,&.active {
+    opacity: 1;
+  }
+  & svg {
+    vertical-align: -1px;
+  }
+  &.inline {
+    position:static;
+    float: inline-end;
+  }
+}
+/*-----------------------------*/
 .btn:focus, .btn.focus {
   outline: 0;
   -webkit-box-shadow: 0 0 0 3px rgba(153, 153, 153, 0.25);

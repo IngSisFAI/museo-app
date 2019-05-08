@@ -125,8 +125,9 @@ obtenerBochonesyEjemplares(){
     this.ejemplares=[];
     if(this.verificarUnico())
     {
-        if(this.excaElegida.bochonesEncontrados.length > 0) 
-        {this.obtenerBochonesExcavacion(this.excaElegida.bochonesEncontrados);}
+        //if(this.excaElegida.bochonesEncontrados.length > 0) 
+        //{this.obtenerBochonesExcavacion(this.excaElegida.bochonesEncontrados);}   
+        this.obtenerBochonesExcavacion(this.excaElegida.bochonesEncontrados);     
     }
 }
 verificarUnico(){
@@ -148,14 +149,26 @@ obtenerBochonesExcavacion(bochonesEncontrados){
         this._peticionesBochonService.getBochonId(element).subscribe(
             result => {          
                 this.bochones.push(result);
-                this.obtenerEjemplaresAsociados();                   
+                //this.obtenerEjemplaresAsociados();                                
                 if(!this.bochones){console.log("Error al tratar de recuperar los Bochones de una Excavación" + result);}
             },
             error =>{console.log(<any>error);}
         ); 
         
     }
+    this.obtenerEjemplaresAsociadosExca(this.excaElegida._id); 
 }
+
+obtenerEjemplaresAsociadosExca(excaId){
+this._peticionesEjemplarService.getEjemExca(excaId).subscribe(
+    result =>{
+        this.ejemplares= result;
+        if(!this.ejemplares){console.log("Error al tratar de recuperar los Ejemplares de una Excavación"+ result);}
+    },
+    error =>{console.log(<any>error);}
+);
+}
+
 obtenerEjemplaresAsociados(){
     for (let index = 0; index < this.bochones.length; index++) {
         const element = this.bochones[index];
@@ -197,11 +210,12 @@ personalUnico(){
 }
 elimEjemDupli(){
     this.ejemUnico=[];
-    for (let index = 0; index < this.ejemplares.length; index++) {
-        const element = this.ejemplares[index];
-         this.ejemplaresUnico(element);
-    }
-    this.ejemplares=this.ejemUnico;
+    //for (let index = 0; index < this.ejemplares.length; index++) {
+    //    const element = this.ejemplares[index];
+    //     this.ejemplaresUnico(element);
+   // }
+   //this.ejemplares=this.ejemUnico;
+
     if (this.mostrarEjemplares){this.mostrarEjemplares=false}
     else {this.mostrarEjemplares=true};
 }
@@ -209,7 +223,7 @@ ejemplaresUnico(ejemplar){
     let esta=false;
     for (let index = 0; index < this.ejemUnico.length; index++) {
         const element = this.ejemUnico[index];
-        if(ejemplar._id ==element._id){
+        if(ejemplar._id == element._id){
             index=this.ejemUnico.length
             esta=true;
         }

@@ -1,7 +1,6 @@
  <title>Página Principal del Museo donde se expone topico generales</title>
- <html lang="es"> 
 
- <!-- Section de Imagen en background y titulo TABINDEX 1 -->
+ <!-- Section de Imagen en background y titulo -->
   <section style="background: url(assets/datos/home/portada.jpg); background-size: cover; background-position: center center" class="hero">
     <div class="container">
       <div class="row">
@@ -11,7 +10,7 @@
       </div>
     </div>
   </section>
-  <!-- Section de Introduccion TABINDEX 2 a 3-->
+  <!-- Section de Introduccion -->
   <section class="intro">
     <div class="container">
         <div class="row">
@@ -22,7 +21,7 @@
         </div>
     </div>
   </section>
-  <!-- Seccion de las Excavaciones importantes marcadas para verse en el Home TABINDEX 4 a 15 -->
+  <!-- Seccion de las Excavaciones importantes marcadas para verse en el Home -->
   <section class="featured-posts no-padding-top">
     <div *ngIf ="excavacionesHome.length > 0" class="container">
       <!-- Excavacion 1 -->
@@ -37,7 +36,7 @@
                 <p tabindex="0">{{excavacionesHome[0]?.descripcion}}</p>
               <div class="post-footer d-flex align-items-center"><a class="author d-flex align-items-center flex-wrap">
                 <div tabindex="0" class="title"><span><strong>Director: </strong> {{excavacionesHome[0]?.director}}</span></div></a>
-                <div tabindex="0" class="date"><i class="icon-clock"></i> {{excavacionesHome[0]?.fechaInicio | date:'dd/MM/yyyy' }} </div>
+                <div tabindex="0" class="date"><strong class="icon-clock"></strong> {{excavacionesHome[0]?.fechaInicio | date:'dd/MM/yyyy' }} </div>
               </div>
             </div>
           </div>
@@ -57,7 +56,7 @@
               <p tabindex="0" >{{excavacionesHome[1]?.descripcion}}</p>
               <div class="post-footer d-flex align-items-center"><a class="author d-flex align-items-center flex-wrap">
                 <div tabindex="0" class="title"><span><strong>Director: </strong>{{excavacionesHome[1]?.director}}</span></div></a>
-                <div tabindex="0" class="date"><i class="icon-clock"></i> {{excavacionesHome[1]?.fechaInicio | date:'dd/MM/yyyy' }}</div>
+                <div tabindex="0" class="date"><strong class="icon-clock"></strong> {{excavacionesHome[1]?.fechaInicio | date:'dd/MM/yyyy' }}</div>
               </div>
             </div>
           </div>
@@ -65,7 +64,7 @@
       </div>
     </div>
   </section>
-  <!-- Divider Section Divison en background y frase TABINDEX 16 -->
+  <!-- Divider Section Divison en background y frase -->
   <section style="background: url(assets/datos/home/divisor.jpg); background-size: cover; background-position: center bottom" class="divider">
     <div class="container">
       <div class="row">
@@ -75,7 +74,7 @@
       </div>
     </div>
   </section>
-  <!-- Algunos Ejemplares que fueron marcados para mostrarse en el home  TABINDEX 17 a 33-->
+  <!-- Algunos Ejemplares que fueron marcados para mostrarse en el home  -->
   <section class="latest-posts" *ngIf="ejemplaresHome.length >0"> 
     <div class="container"> 
       <h2 tabindex="0" >Los últimos ejemplares hallados...</h2>
@@ -120,28 +119,28 @@
       </div>
     </div>
   </section>
-   <!-- Gallery Section // galeria de fotos TABINDEX  34 a 37-->
+   <!-- Gallery Section // galeria de fotos -->
   <section class="gallery no-padding">    
     <div class="row">
       <div class="mix col-lg-3 col-md-3 col-sm-6">
         <div class="item"><a href={{rutaHome}}{{infoHome[0]?.fotosHome[0].nombre}} data-fancybox="gallery" class="image">
           <img tabindex="0" src={{rutaHome}}{{infoHome[0]?.fotosHome[0].nombre}} alt={{infoHome[0]?.fotosHome[0].descripcion}} class="img-fluid">
-            <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+            <div class="overlay d-flex align-items-center justify-content-center"><strong class="icon-search"></strong></div></a></div>
       </div>
       <div class="mix col-lg-3 col-md-3 col-sm-6">
           <div class="item"><a href={{rutaHome}}{{infoHome[0]?.fotosHome[1].nombre}} data-fancybox="gallery" class="image">
             <img tabindex="0" src={{rutaHome}}{{infoHome[0]?.fotosHome[1].nombre}} alt={{infoHome[0]?.fotosHome[1].descripcion}} class="img-fluid">
-              <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+              <div class="overlay d-flex align-items-center justify-content-center"><strong class="icon-search"></strong></div></a></div>
         </div>
       <div class="mix col-lg-3 col-md-3 col-sm-6">
           <div class="item"><a href={{rutaHome}}{{infoHome[0]?.fotosHome[2].nombre}} data-fancybox="gallery" class="image">
             <img tabindex="0" src={{rutaHome}}{{infoHome[0]?.fotosHome[2].nombre}} alt={{infoHome[0]?.fotosHome[2].descripcion}} class="img-fluid">
-              <div  class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+              <div  class="overlay d-flex align-items-center justify-content-center"><strong class="icon-search"></strong></div></a></div>
         </div>
       <div class="mix col-lg-3 col-md-3 col-sm-6">
           <div class="item"><a href={{rutaHome}}{{infoHome[0]?.fotosHome[3].nombre}} data-fancybox="gallery" class="image">
             <img tabindex="0" src={{rutaHome}}{{infoHome[0]?.fotosHome[3].nombre}} alt={{infoHome[0]?.fotosHome[3].descripcion}} class="img-fluid">
-              <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+              <div class="overlay d-flex align-items-center justify-content-center"><strong class="icon-search"></strong></div></a></div>
         </div>
     </div>
   </section>
