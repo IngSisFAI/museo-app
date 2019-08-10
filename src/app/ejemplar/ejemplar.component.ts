@@ -35,7 +35,7 @@ export class EjemplaresComponent {
         this.piezas=[];
         this.bochones=[];
         this.filtrado = {nombre:''};
-        this.rutaEjem=config.rutaEjem;
+        this.rutaEjem =config.rutaEjem;
         this.rutaPieza=config.rutaPieza;
         this.mostrarTodas=true;
         this.indicePagina=0;
@@ -109,6 +109,7 @@ pageChanged(event: any): void {
 }
 setearFiltro(param){
     this.filtrado = {nombre:param};
+    if(!this.mostrarTodas) {this.mostrarTodas=true;}
     this.mostrarEjem();
 }
 mostrarEjem(){

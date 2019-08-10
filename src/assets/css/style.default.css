@@ -323,13 +323,14 @@ i[class*="icon-"] {
 }
 
 .pagination-template a.page-link {
-  width: 40px;
-  height: 40px;
+  width: 2.9em;
+  height: 2.9em;
   line-height: 27px;
   border-radius: 50% !important;
   border: 1px solid #ddd;
   color: #555;
   text-align: center;
+ 
 }
 
 .pagination-template a.page-link:hover, .pagination-template a.page-link.active {
@@ -366,13 +367,14 @@ h6 {
 }
 
 .pagination-template a.page-link {
-  width: 40px;
-  height: 40px;
-  line-height: 27px;
+  width: 1.9em;
+  height: 1.5em;
+  line-height: 30px;
   border-radius: 50% !important;
   border: none;
   color: rgb(14, 13, 13);
   text-align: center;
+  font-size: 1.6em;
 }
 
 .pagination-template a.page-link:hover, .pagination-template a.page-link.active {
@@ -628,7 +630,7 @@ div[class*="-btn"] {
 section.hero {
   padding: 0;
   color: #fff;
-}
+  }
 
 section.hero .container {
   padding: 200px 20px;
@@ -1168,7 +1170,7 @@ main.posts-listing .post {
 }
 
 main.posts-listing .post-footer {
-  font-size: 0.8em;
+  font-size: 1.09em;
 }
 
 .widget.search .form-group {
@@ -1204,17 +1206,29 @@ main.posts-listing .post-footer {
 
 .widget.search .submit {
   height: 40px;
-  padding: 0;
+  padding: 0.03em 0.7em;
   line-height: 40px;
   background: none;
-  border: none;
+  border: 1px solid #515151;
+  border-radius: 50px;
   color: #555;
   font-size: 0.9em;
-  position: absolute;
+  /*position: absolute;*/
   top: 0;
   right: 0;
-}
+  }
 
+  .submit :hover { 
+    height: 40px;
+    padding: 0.03em 0.7em;
+    line-height: 40px;
+    background: #999;
+    border-radius: 50px;
+    color: #fff;
+    border-color: #999;
+    font-size: 0.9em;
+  }
+  
 .widget.latest-posts a {
   display: block;
   color: #555;
@@ -2407,7 +2421,7 @@ a.text-primary:focus, a.text-primary:hover {
 }
 
 .page-link {
-  padding: 0.5rem 0.75rem;
+  padding: 0.2rem 0.25rem;
   line-height: 1.25;
   color: #999;
   background-color: #fff;

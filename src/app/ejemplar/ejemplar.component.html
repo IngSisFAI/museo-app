@@ -7,66 +7,118 @@
             <div *ngIf = "!mostrarTodas" > 
               <!--Muestra un ejemplar porque el filtrado dio uno -->
               <div *ngIf ="(ejemplares | filterBy:filtrado).length == 1">
-                <div class="container">
-                  <div class="row">
+                <div class="container">                  
                     <div class="post-single"  *ngFor="let ejemplar of ejemplares | filterBy:filtrado | orderBy:['nombre'] " >
                       <div tabindex="0" class="post-thumbnail"><img  src={{rutaEjem}}{{ejemplar._id}}{{ejemplar.ilustracionCompleta}} alt={{ejemplar.descripcionIC}} class="img-fluid"></div>            
                       <div class="post-details">
-                        <h2 tabindex="0" >{{ejemplar.nombre}}:{{ejemplar.periodo}}</h2>  
+                        <h2 tabaindex="0"  >{{ejemplar.nombre}}:{{ejemplar.periodo}}</h2>  
                         <div class="widget tags"> 
-                          <h3 tabindex="0" class="h5">Nro de Coleccion:{{ejemplar.nroColeccion}} </h3>
-                          <h3 tabindex="0" class="h6" >Fecha de Ingreso: {{ejemplar.fechaIngresoColeccion | date:'dd/MM/yyyy'}}</h3>
+                          <h3 tabaindex="0" class="h5">Nro de Coleccion:{{ejemplar.nroColeccion}} </h3>
+                          <h3 tabaindex="0" class="h6" >Fecha de Ingreso: {{ejemplar.fechaIngresoColeccion | date:'dd/MM/yyyy'}}</h3>
                           <ul class="list-inline">
-                            <li class="list-inline-item"><a tabindex="0" class="tag" data-toggle="collapse" href="#clasificacionCompletaEjemplar" role="button" aria-expanded="false" aria-controls="clasificacionCompleta" > Clasificación</a></li>
+                            <li class="list-inline-item"><a tabaindex="0" class="tag" data-toggle="collapse" 
+                              href="#clasificacionCompletaEjemplar" role="button" aria-expanded="false" aria-controls="clasificacionCompleta" > Clasificación</a></li>
                           </ul>
                           <div class="collapse" id="clasificacionCompletaEjemplar">
                               <div class="card card-body">
-                                <h3 tabindex="0" class="h6">Clasificación detallada del Ejemplar:</h3>
-                                <li tabindex="0" ><strong>Taxon Reino: </strong> {{ejemplar.taxonReino}}</li>
-                                <li tabindex="0"><strong>Taxon Filo: </strong> {{ejemplar.taxonFilo}} </li>
-                                <li tabindex="0"><strong>Taxon Clase: </strong> {{ejemplar.taxonClase}}</li>
-                                <li tabindex="0"><strong>Taxon Orden: </strong> {{ejemplar.taxonOrden}}</li>
-                                <li tabindex="0"><strong>Taxon Familia: </strong> {{ejemplar.taxonFamilia}}</li>                      
-                                <li tabindex="0"><strong>Taxon Genero: </strong> {{ejemplar.taxonGenero}}</li>
-                                <li tabindex="0"><strong>Taxon Especie: </strong> {{ejemplar.taxonEspecie}}</li>
-                                <li tabindex="0"><strong>Dimensión Largo: </strong> {{ejemplar.dimensionLargo}} mts.</li>
-                                <li tabindex="0"><strong>Dimensión Alto: </strong> {{ejemplar.dimensionAlto}} mts.</li>
-                                <li tabindex="0"><strong>Peso: </strong> {{ejemplar.peso}} kgrs.</li>
-                                <li tabindex="0"><strong>Alimentación: </strong> {{ejemplar.alimentacion}}</li>
+                                <h3 tabaindex="0" class="h6">Clasificación detallada del Ejemplar:</h3>
+                                <p tabaindex="0" ><strong>Taxon Reino: </strong> {{ejemplar.taxonReino}}</p>
+                                <p tabaindex="0"><strong>Taxon Filo: </strong> {{ejemplar.taxonFilo}} </p>
+                                <p tabaindex="0"><strong>Taxon Clase: </strong> {{ejemplar.taxonClase}}</p>
+                                <p tabaindex="0"><strong>Taxon Orden: </strong> {{ejemplar.taxonOrden}}</p>
+                                <p tabaindex="0"><strong>Taxon Familia: </strong> {{ejemplar.taxonFamilia}}</p>                      
+                                <p tabaindex="0"><strong>Taxon Genero: </strong> {{ejemplar.taxonGenero}}</p>
+                                <p tabaindex="0"><strong>Taxon Especie: </strong> {{ejemplar.taxonEspecie}}</p>
+                                <p tabaindex="0"><strong>Dimensión Largo: </strong> {{ejemplar.dimensionLargo}} mts.</p>
+                                <p tabaindex="0"><strong>Dimensión Alto: </strong> {{ejemplar.dimensionAlto}} mts.</p>
+                                <p tabaindex="0"><strong>Peso: </strong> {{ejemplar.peso}} kgrs.</p>
+                                <p tabaindex="0"><strong>Alimentación: </strong> {{ejemplar.alimentacion}}</p>
                               </div>
                           </div>
-                          <br>
-                          <p tabindex="0" class="lead">{{ejemplar.descripcion1}}</p>
-                          <p tabindex="0">{{ejemplar.descripcion1A}}</p>
+                          <p tabaindex="0" class="lead">{{ejemplar.descripcion1}}</p>
+                          <p tabaindex="0">{{ejemplar.descripcion1A}}</p>
                         </div>
                         <div class="post-body">
+                          <!-- CARRUSEL COMUN 
                           <carousel *ngIf = "ejemplar.fotosEjemplar.length >=1 " >
                               <slide *ngFor ="let foto of ejemplar.fotosEjemplar" >
                                 <img src={{rutaEjem}}{{ejemplar._id}}{{foto.nombre}} alt={{foto.descripcion}} style="display: block; width: 100%;">
                               </slide>                        
                           </carousel>
-                          <br>
-                          <h3 tabindex="0">Era Geologica: </h3>
-                          <p tabindex="0">{{ejemplar.descripcion2}}</p>
-                          <li tabindex="0"><strong>Formación: </strong>{{ejemplar.eraGeologica[0].formacion}}</li>
-                          <li tabindex="0"><strong>Grupo: </strong>{{ejemplar.eraGeologica[0].grupo}}</li>
-                          <li tabindex="0"><strong>Subgrupo: </strong>{{ejemplar.eraGeologica[0].subgrupo}}</li>
-                          <li tabindex="0"><strong>Edad: </strong>{{ejemplar.eraGeologica[0].edad}}</li>
-                          <li tabindex="0"><strong>Periodo: </strong>{{ejemplar.eraGeologica[0].periodo}}</li>
-                          <li tabindex="0"><strong>Era: </strong>{{ejemplar.eraGeologica[0].era}}</li>
-                          <br>
+                         -->
+                          <!--ACA SE VERIFICA QUE EXISTAN AL MENOS 4 FOTOS PARA MOSTRAR EN CARRUSEL-->  
+                          <div *ngIf="ejemplar.fotosEjemplar.length >= 4">                                                 
+                          <!--***************************CARUSEL************************************************************************-->
+                          <div id="fotosEjemplar" class="carousel slide" data-ride="carousel"  data-interval="false" 
+                          role="complementary" aria-labelledby="id_title" aria-describedby="id_desc" >
+                              <h2 id="id_title" class="sr-only">Carousel que contiene 4 Fotos.</h2>
+                              <p id="id_desc" class="sr-only">El carousel es un conjunto de imagenes que no rotan automáticamente, 
+                                Use Enter o los botones anterior y siguiente para cambiar la foto que se esta mostrando.</p>
+                              <!-- Indicators -->
+                              <ul class="carousel-indicators" >
+                                <li  data-target="#fotosEjemplar" data-slide-to="0" class="active">Primer Foto</li>
+                                <li  data-target="#fotosEjemplar" data-slide-to="1">Segunda Foto</li>
+                                <li  data-target="#fotosEjemplar" data-slide-to="2">Tecer Foto</li>
+                                <li  data-target="#fotosEjemplar" data-slide-to="3">Cuarta Foto</li>
+                              </ul>                          
+                              <!-- The slideshow -->
+                              <div class="carousel-inner">
+                                <div class="carousel-item active" aria-selected="true" tabindex="0">
+                                  <img src={{rutaEjem}}{{ejemplar._id}}{{ejemplar.fotosEjemplar[0].nombre}} alt={{ejemplar.fotosEjemplar[0].descripcion}} width="1100" height="500">
+                                  <div class="carousel-caption d-none d-md-block">
+                                      <h3>{{ejemplar.fotosEjemplar[0].descripcion}} - (Nombre: {{ejemplar.fotosEjemplar[0].nombre}})</h3>
+                                    </div>
+                                </div>
+                                <div class="carousel-item"  aria-selected="false" tabindex="-1">
+                                  <img src={{rutaEjem}}{{ejemplar._id}}{{ejemplar.fotosEjemplar[1].nombre}} alt={{ejemplar.fotosEjemplar[1].descripcion}} width="1100" height="500">
+                                  <div class="carousel-caption d-none d-md-block">
+                                      <h3>{{ejemplar.fotosEjemplar[1].descripcion}} - (Nombre: {{ejemplar.fotosEjemplar[1].nombre}})</h3>
+                                    </div>
+                                </div>    
+                                <div class="carousel-item"  aria-selected="false" tabindex="-1">
+                                    <img src={{rutaEjem}}{{ejemplar._id}}{{ejemplar.fotosEjemplar[2].nombre}} alt={{ejemplar.fotosEjemplar[2].descripcion}} width="1100" height="500">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3>{{ejemplar.fotosEjemplar[2].descripcion}} - (Nombre: {{ejemplar.fotosEjemplar[2].nombre}})</h3>
+                                      </div>
+                                  </div>                            
+                                <div class="carousel-item"  aria-selected="false" tabindex="-1">
+                                    <img src={{rutaEjem}}{{ejemplar._id}}{{ejemplar.fotosEjemplar[3].nombre}} alt={{ejemplar.fotosEjemplar[3].descripcion}} width="1100" height="500">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3>{{ejemplar.fotosEjemplar[3].descripcion}} - (Nombre: {{ejemplar.fotosEjemplar[3].nombre}})</h3>
+                                      </div>
+                                  </div>                                
+                              </div>                          
+                              <!-- Left and right controls -->
+                              <a class="carousel-control-prev" href="#fotosEjemplar" role="button" data-slide="prev" >
+                                <span class="carousel-control-prev-icon"></span>
+                              </a>
+                              <a class="carousel-control-next" href="#fotosEjemplar" role="button" data-slide="next" >
+                                <span class="carousel-control-next-icon"></span>
+                              </a>
+                            </div>
+                          </div>
+                          <!-- ********************************************************************************************************* -->                    
+                        </div>
+                        <div class="widget tags" >
+                          <h3 tabaindex="0">Era Geologica: </h3>
+                          <p tabaindex="0">{{ejemplar.descripcion2}}</p>
+                          <p tabaindex="0"><strong>Formación: </strong>{{ejemplar.eraGeologica[0].formacion}}</p>
+                          <p tabaindex="0"><strong>Grupo: </strong>{{ejemplar.eraGeologica[0].grupo}}</p>
+                          <p tabaindex="0"><strong>Subgrupo: </strong>{{ejemplar.eraGeologica[0].subgrupo}}</p>
+                          <p tabaindex="0"><strong>Edad: </strong>{{ejemplar.eraGeologica[0].edad}}</p>
+                          <p tabaindex="0"><strong>Periodo: </strong>{{ejemplar.eraGeologica[0].periodo}}</p>
+                          <p tabaindex="0"><strong>Era: </strong>{{ejemplar.eraGeologica[0].era}}</p>                        
                           <blockquote class="blockquote">
-                            <p tabindex="0">Una era geológica es una unidad geocronológica formal de la escala temporal geológica que representa el tiempo correspondiente a la duración de un eratema, la unidad cronoestratigráfica equivalente que comprende todas las rocas formadas en ese tiempo. Las eras son una de las divisiones mayores del tiempo geológico, son subdivisiones de los eones y se dividen a su vez en períodos.</p>
+                            <p tabaindex="0">Una era geológica es una unidad geocronológica formal de la escala temporal geológica que representa el tiempo correspondiente a la duración de un eratema, la unidad cronoestratigráfica equivalente que comprende todas las rocas formadas en ese tiempo. Las eras son una de las divisiones mayores del tiempo geológico, son subdivisiones de los eones y se dividen a su vez en períodos.</p>
                           </blockquote>
-                          <h4 tabindex="0">Area de Hallazgo: </h4>
-                          <p tabindex="0">{{ejemplar.descripcion3}}</p>
-                          <li tabindex="0"><strong>Nombre: </strong>{{ejemplar.areaHallazgo[0].nombreArea}}</li>
-                          <li tabindex="0"><strong>País: </strong>{{ejemplar.areaHallazgo[0].pais}}</li>
-                          <li tabindex="0"><strong>Ciudad: </strong>{{ejemplar.areaHallazgo[0].ciudad}}</li>
-                        </div>                            
+                          <h4 tabaindex="0">Area de Hallazgo: </h4>
+                          <p tabaindex="0">{{ejemplar.descripcion3}}</p>
+                          <p tabaindex="0"><strong>Nombre: </strong>{{ejemplar.areaHallazgo[0].nombreArea}}</p>
+                          <p tabaindex="0"><strong>País: </strong>{{ejemplar.areaHallazgo[0].pais}}</p>
+                          <p tabaindex="0"><strong>Ciudad: </strong>{{ejemplar.areaHallazgo[0].ciudad}}</p>                          
+                        </div> 
                       </div>
                     </div>
-                  </div>
                 </div>
               </div>
               <!--No puede mostrar ningun Ejemplar en virtud de que la busqueda dio vacio -->
@@ -84,7 +136,7 @@
                     </a>
                 </div>
               </div>
-            </div>
+            </div> 
             <!--Muestra los Ejemplares resumidos-->
             <div *ngIf= "mostrarTodas" >
               <div class="container">
@@ -94,8 +146,8 @@
                     <div tabindex="0" class="post-thumbnail"><img src={{rutaEjem}}{{ejemplares[indicePagina]?._id}}{{ejemplares[indicePagina]?.ilustracionCompleta}}  alt={{ejemplares[indicePagina]?.descripcionIC}} class="img-fluid"></div>
                     <div class="post-details">
                       <div class="post-meta d-flex justify-content-between">
-                        <div tabindex="0" class="date meta-last">Especie: {{ejemplares[(indicePagina)]?.taxonEspecie}}</div>
-                        <div tabindex="0" class="category">Familia: {{ejemplares[(indicePagina)]?.taxonFamilia}}</div>
+                        <div  class="date meta-last">Especie: {{ejemplares[(indicePagina)]?.taxonEspecie}}</div>
+                        <div  class="category">Familia: {{ejemplares[(indicePagina)]?.taxonFamilia}}</div>
                       </div><a (click)="setearFiltro(ejemplares[(indicePagina)]?.nombre)" (keyup.enter)="setearFiltro(ejemplares[(indicePagina)]?.nombre)" title="Link a información detallada del ejemplar seleccionado">
                         <h2 tabindex="0" class="h4" ng-focus="link" >{{ejemplares[(indicePagina)]?.nombre | uppercase }}</h2></a>
                         <p tabindex="0" class="text-muted">{{ejemplares[(indicePagina)]?.descripcion1}}</p>
@@ -106,8 +158,8 @@
                     <div tabindex="0" class="post-thumbnail"><img src={{rutaEjem}}{{ejemplares[indicePagina+1]?._id}}{{ejemplares[indicePagina+1]?.ilustracionCompleta}}  alt={{ejemplares[indicePagina+1]?.descripcionIC}} class="img-fluid"></div>
                     <div class="post-details">
                       <div class="post-meta d-flex justify-content-between">
-                        <div tabindex="0" class="date meta-last">Especie: {{ejemplares[(indicePagina+1)]?.taxonEspecie}}</div>
-                        <div tabindex="0" class="category">Familia: {{ejemplares[(indicePagina+1)]?.taxonFamilia}}</div>
+                        <div  class="date meta-last">Especie: {{ejemplares[(indicePagina+1)]?.taxonEspecie}}</div>
+                        <div  class="category">Familia: {{ejemplares[(indicePagina+1)]?.taxonFamilia}}</div>
                       </div><a (click)="setearFiltro(ejemplares[(indicePagina+1)]?.nombre)" (Keyup.enter)="setearFiltro(ejemplares[(indicePagina+1)]?.nombre)"  title="Link a información detallada del ejemplar seleccionado">
                         <h2 tabindex="0" class="h4">{{ejemplares[(indicePagina+1)]?.nombre | uppercase }}</h2></a>
                       <p tabindex="0" class="text-muted">{{ejemplares[(indicePagina+1)]?.descripcion1}}</p>
@@ -126,7 +178,8 @@
       <!--Si no hay Ejemplares -->
       <div *ngIf = "ejemplares?.length == 0" >
           <div class="post blog-post col-lg-8"> 
-              <div class="post-thumbnail"><img  src="assets/datos/ejemplares/portada.jpg" alt="Portada general, SIN ejemplares todavia" class="img-fluid"></div>            
+              <div class="post-thumbnail"><img  src="assets/datos/ejemplares/portada.jpg" alt="Portada general, SIN ejemplares " class="img-fluid"></div>            
+              <h1 tabindex="0">NO HAY EJEMPLARES PARA VISUALIZAR</h1>
           </div>
       </div>
     </main>
@@ -137,8 +190,10 @@
         <h3 tabindex="0" class="h5">Buscar Ejemplares:</h3>
         <div class="search-form">
           <div class="form-group">
-            <input tabindex="0" type="search" placeholder="Nombre del Ejemplar?"  [(ngModel)]= filtrado.nombre name="buscaNombreEjem" aria-label="Para ingresar nombre de ejemplar Ejemplar">
-            <button tabindex="0" type="submit" class="submit" (click)="mostrarEjem()" (keyup.enter)="mostrarEjem()" aria-label="buscar Ejemplar" ><i class="icon-search" role="button" ></i></button>
+            <input tabindex="0" type="search" placeholder="Nombre del Ejemplar?"  [(ngModel)]= filtrado.nombre name="buscaNombreEjem" 
+            title="Permite buscar un ejemplar particular">
+            <button tabindex="0" role="button" type="submit" class="submit" (click)="mostrarEjem()" (keyup.enter)="mostrarEjem()" name="buscar Ejemplar"
+            aria-label="buscar Ejemplar" ><a class="icon-search" role="button" >  Buscar</a></button>
           </div>
         </div>
       </div>
@@ -146,11 +201,13 @@
           <h3 tabindex="0" class="h6">Mostrar Todos los Ejemplares</h3>
           <div class="search-form">
             <div class="form-group">
-              <input type="text" placeholder="Haga click en la lupa" readonly aria-label="Haga click en la lupa">
-              <button tabindex="0" type="submit" class="submit" (click)="mostrarEjem()" (keyup.enter)="mostrarEjem()" aria-label="Ver Todos los Ejemplares" ><i class="icon-search"></i></button>
+              <input type="text" placeholder="Haga click en la lupa o Enter" readonly name="vertodoslosEjemplares"
+              title="Permite volver a ver todos los ejemplares" >
+              <button tabindex="0" role="button" type="submit" class="submit" (click)="mostrarEjem()" (keyup.enter)="mostrarEjem()" name="ver todos los Ejemplares" 
+              aria-label="Ver Todos los Ejemplares" ><a class="icon-search">  Volver</a></button>
             </div>
           </div>
-        </div>
+      </div>
       <!-- Las Piezas Asociadas     -->
       <div class="widget latest-posts" *ngIf="!mostrarTodas && (piezas.length >0) && (ejemplares | filterBy:filtrado).length == 1 " >
         <h3 tabindex="0" class="h5">Piezas:</h3>
@@ -196,17 +253,17 @@
             <accordion>
                 <accordion-group heading={{bochon.nombre}} tabindex="0" (keyup.enter)="isOpen = !isOpen" [isOpen]="isOpen" >
                     <h3 tabindex="0" class="h6"><strong>CLASIFICACION DETALLADA DEL BOCHON:</strong></h3>
-                    <li tabindex="0"><strong>Nro de Campo: </strong>{{bochon.nroCampo}}</li>
-                    <li tabindex="0"><strong>Preparador: </strong> {{bochon.preparador}} </li>
-                    <li tabindex="0"><strong>Preparación: </strong>{{bochon.tipoPreparacion}}</li>
-                    <li tabindex="0"><strong>Acidos Aplicados: </strong> 
+                    <p tabindex="0"><strong>Nro de Campo: </strong>{{bochon.nroCampo}}</p>
+                    <p tabindex="0"><strong>Preparador: </strong> {{bochon.preparador}} </p>
+                    <p tabindex="0"><strong>Preparación: </strong>{{bochon.tipoPreparacion}}</p>
+                    <div tabindex="0"><strong>Acidos Aplicados: </strong> 
                       <div *ngFor="let acido of bochon.acidosAplicados">
-                        <li tabindex="0" align="center"  >{{acido}}</li> 
-                      </div>  
-                      <div *ngFor="let pieza of piezas | filterBy:{_id:bochon.piezaId} ">
-                        <li tabindex="0"><strong>Contiene pieza: </strong>{{pieza.identificador}}</li>
-                      </div>
-                    </li>
+                        <p tabindex="0" >{{acido}}</p> 
+                      </div> 
+                    </div> 
+                    <div *ngFor="let pieza of piezas | filterBy:{_id:bochon.piezaId} ">
+                      <p tabindex="0"><strong>Contiene pieza: </strong>{{pieza.identificador}}</p>
+                    </div>                  
                 </accordion-group>
               </accordion>
             </ul>

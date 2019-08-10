@@ -1,156 +1,159 @@
 <div class="container">
   <div class="row">
-    <main class="post blog-post col-lg-8" >
-    <!-- Seria para mostrar una persona   -->
-      <div *ngIf="!mostrarTodas" >   
-        <div *ngIf="(personas | filterBy:filtrado ).length == 1 ">
-          <div class="post-single" >
-            <div *ngFor="let persona of personas | filterBy:filtrado | orderBy:['nombres','apellidos'] ">
-              <div class="container">
-                <div class="row">
-                  <div class="post col-xl-6">
-                    <div tabindex="0" class="post-thumbnail"><img src={{fotoRuta}}{{persona.foto}}  alt=Foto:{{persona.nombres}},{{persona.apellidos}} class="img-fluid rounded-circle"></div>
-                    <div class="post-details"></div>
-                  </div>
-                  <div class="post col-xl-6">
-                    <div class="post-thumbnail"></div>
-                    <div class="post-details">
-                      <div class="post-meta d-flex justify-content-between">
-                        <h2 tabindex="0" class="h6">Datos personales:</h2>
+  <main class="post blog-post col-lg-8" >
+      <!--Si existe personal -->
+      <div *ngIf="personas?.length > 0"> 
+        <!-- Seria para mostrar una persona   -->
+        <div *ngIf="!mostrarTodas" >  
+          <!--Muestra una persona porque el filtro dio una como resutlado--> 
+          <div *ngIf="(personas | filterBy:filtrado ).length == 1 ">
+            <div class="post-single" >
+              <div *ngFor="let persona of personas | filterBy:filtrado | orderBy:['nombres','apellidos'] ">
+                <div class="container">
+                  <div class="row">
+                    <div class="post col-xl-6">
+                      <div tabindex="0" class="post-thumbnail"><img src={{fotoRuta}}{{persona.foto}}  alt=Foto:{{persona.nombres}},{{persona.apellidos}} class="img-fluid rounded-circle"></div>
+                    </div>
+                    <div class="post col-xl-6">
+                      <div class="post-details">
+                          <h2 tabindex="0" class="h3">Datos personales:</h2>
+                          <h3 tabindex="0" class="h4">{{persona.nombres | uppercase }}, {{persona.apellidos | uppercase }}</h3>
+                          <h4 tabindex="0" class="h5" >D.N.I.:{{persona.dni}}</h4>
+                          <h5 tabindex="0" >Título: {{persona.titulos[0]}}</h5>
+                          <div tabindex="0" class="date meta-last">Fecha de Inicio: {{persona.fechaInicio | date:'dd/MM/yyyy' }}</div>
                       </div>
-                        <h3 tabindex="0" class="h4">{{persona.nombres | uppercase }}, {{persona.apellidos | uppercase }}</h3>
-                        <h4 tabindex="0" class="h5" >D.N.I.:{{persona.dni}}</h4>
-                        <h5 tabindex="0" >Título: {{persona.titulos[0]}}</h5>
-                        <div tabindex="0" class="date meta-last">Fecha de Inicio: {{persona.fechaInicio | date:'dd/MM/yyyy' }}</div>
                     </div>
                   </div>
                 </div>
+                <!--Es lo que explica a la persona.....-->
+                <div class="post-body"> 
+                    <p tabindex="0" class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+                <!--Muestra las excavaciones que Dirige si tiene-->
+                <div tabindex="0" class="h3" *ngIf="excaDirige.length > 0">Excavaciones que Dirige:
+                  <div  class="widget tags" *ngFor="let exca of excaDirige | orderBy:['nombre']">  
+                    <h5 tabindex="0" class="category">{{exca.nombre | uppercase }}  - Código: {{exca.codigo}}</h5>           
+                    <div class="item d-flex align-items-center" >
+                      <div class="image" *ngFor="let foto of exca.fotosExcavacion">
+                        <a href={{rutaExca}}{{exca._id}}{{foto.nombre}}  title="Ir a galería de fotos que contiene a {{foto.descripcion}}" data-fancybox="gallery" class="image">
+                        <img src={{rutaExca}}{{exca._id}}{{foto.nombre}} alt={{foto.descripcion}} class="img-fluid"></a>
+                      </div>
+                    </div>                                                
+                    <h6 tabindex="0" class="lead ">{{exca.descripcion}}</h6>
+                    <div class="widget tags">
+                      <p tabindex="0" class="lead "><strong>Ubicación Geográfica:</strong></p>
+                      <p tabindex="0" class="lead ">Area: {{exca.area}}</p>
+                      <p tabindex="0" class="lead ">Localidad: {{exca.localidad}} </p>
+                      <p tabindex="0" class="lead ">Provincia: {{exca.provincia}} </p>                        
+                      <p tabindex="0" class="lead ">PuntoGPS: [ {{exca.puntoGps[0]}} , {{exca.puntoGps[1]}} ]</p>                        
+                    </div>                                  
+                  </div> 
+                </div>
+                <div tabindex="0" class="h5"*ngIf="excaDirige.length == 0">No es Director de ninguna Excavación.</div>
               </div>
-              <!--Es lo que explica a la persona.....-->
-              <div class="post-body"> 
-                  <p tabindex="0" class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-              </div>
-              <!--Muestra las excavaciones que Dirige si tiene-->
-              <div tabindex="0" class="h3" *ngIf="excaDirige.length > 0">Excavaciones que Dirige:
-                <div  *ngFor="let exca of excaDirige | orderBy:['nombre']">  
-                <br><br>
-                <div  class="widget tags">    
-                <header>  
-                  <h5 tabindex="0" class="category">{{exca.nombre | uppercase }}  - Código: {{exca.codigo}}</h5>           
-                  <div class="item d-flex align-items-center" >
-                    <div class="image" *ngFor="let foto of exca.fotosExcavacion">
-                      <a href={{rutaExca}}{{exca._id}}{{foto.nombre}}  title={{foto.descripcion}} data-fancybox="gallery" class="image">
-                      <img src={{rutaExca}}{{exca._id}}{{foto.nombre}} alt={{foto.descripcion}} class="img-fluid"></a>
-                    </div>
-                  </div>                                                
-                  <br>
-                  <h6 tabindex="0" class="lead ">{{exca.descripcion}}</h6>
-                </header>
-                <ul tabindex="0" class="h4"><strong>Ubicación Geográfica:</strong>
-                  <li tabindex="0" class="h6">Area: {{exca.area}}</li>
-                  <li tabindex="0" class="h6">Localidad: {{exca.localidad}} </li>
-                  <li tabindex="0" class="h6">Provincia: {{exca.provincia}} </li>                        
-                  <li tabindex="0" class="h6">PuntoGPS: {{exca.puntoGps[0]}},{{exca.puntoGps[1]}} </li>                        
-                </ul>                
-              </div> 
-              </div> 
-
-              </div>
-              <div tabindex="0" class="h5"*ngIf="excaDirige.length == 0">No es Director de ninguna Excavación.</div>
-            </div>
+            </div> 
           </div> 
-        </div> 
-        <div *ngIf="(personas | filterBy:filtrado ).length == 0 "   class="post-body" >
-          <p tabindex="0" class="lead">La busqueda que planteo para las Personas <strong>no dio</strong> resultado.</p>
-          <p tabindex="0" >Tenga en cuenta que esta buscando por <strong>Nombres / Apellidos / dni </strong> de la Persona, agregre mas detalle a la busqueda. </p>
+          <!--No hay personas que mostrar porque el filtro dio vacio--> 
+          <div *ngIf="(personas | filterBy:filtrado ).length == 0 "   class="post-body" >
+            <p tabindex="0" class="lead">La busqueda que planteo para las Personas <strong>no dio</strong> resultado.</p>
+            <p tabindex="0" >Tenga en cuenta que esta buscando por <strong>Nombres / Apellidos / dni </strong> de la Persona, agregre mas detalle a la busqueda. </p>
+          </div>
+          <!--Hay varias personas porque el filtro dio una como resutlado varias --> 
+          <div *ngIf="(personas | filterBy:filtrado ).length > 1 "   class="post-body" >
+              <p tabindex="0" class="lead">La busqueda que planteo para las Persona <strong>dio varios </strong> resultadoss.</p>
+              <p tabindex="0" ><strong>Seleccione </strong> una persona de la siguiente lista o realice una nueva busqueda.</p>
+              <div *ngFor="let persona of personas | filterBy:filtrado | orderBy:['nombres','apellidos'] ">
+                  <a (click)="setearFiltro(persona.nombres, persona.apellidos, persona._id)" (Keyup.enter)="setearFiltro(persona.nombres, persona.apellidos, persona._id)" >
+                      <h3 tabindex="0" class="h4">{{persona.nombres | uppercase }}, {{persona.apellidos | uppercase }}</h3>
+                  </a>
+              </div>
+          </div>   
         </div>
-        <div *ngIf="(personas | filterBy:filtrado ).length > 1 "   class="post-body" >
-            <p tabindex="0" class="lead">La busqueda que planteo para las Persona <strong>dio varios </strong> resultadoss.</p>
-            <p tabindex="0" ><strong>Seleccione </strong> una persona de la siguiente lista o realice una nueva busqueda.</p>
-            <div *ngFor="let persona of personas | filterBy:filtrado | orderBy:['nombres','apellidos'] ">
-                <a (click)="setearFiltro(persona.nombres, persona.apellidos, persona._id)" (Keyup.enter)="setearFiltro(persona.nombres, persona.apellidos, persona._id)" >
-                    <h3 tabindex="0" class="h4">{{persona.nombres | uppercase }}, {{persona.apellidos | uppercase }}</h3>
+        <!-- Muestra las personas Resumidas -->
+        <div *ngIf= mostrarTodas >                 
+        <div class="container">
+          <div class="row">
+            <!-- Persona nro 1 de la pagina -->
+            <div *ngIf ="personas?.length >= indicePagina+1" class="post col-xl-6">
+              <div tabindex="0" class="post-thumbnail"><img src={{fotoRuta}}{{personas[indicePagina]?.foto}}  alt=Foto:{{personas[indicePagina]?.nombres}},{{personas[(indicePagina)]?.apellidos}} class="img-fluid"></div>
+              <div class="post-details">
+                <div class="post-meta d-flex justify-content-between">
+                  <div tabindex="0" class="date meta-last">{{personas[(indicePagina)]?.fechaInicio | date:'dd/MM/yyyy' }}</div>
+                </div>
+                <a (click)="setearFiltro(personas[(indicePagina)]?.nombres, personas[(indicePagina)]?.apellidos,personas[(indicePagina)]?._id)" 
+                  (Keyup.enter)="setearFiltro(personas[(indicePagina)]?.nombres, personas[(indicePagina)]?.apellidos,personas[(indicePagina)]?._id)"     
+                  title="Link a información detallada del Personal seleccionado">
+                  <h2 tabindex="0" class="h4">{{personas[(indicePagina)]?.nombres | uppercase }}, {{personas[(indicePagina)]?.apellidos | uppercase }}</h2>
                 </a>
+                <p tabindex="0" class="text-muted">{{personas[(indicePagina)]?.titulos}}</p>
+              </div>
             </div>
-        </div>   
-      </div>
-    <!-- Muestra las personas Resumidas -->
-    <div *ngIf= mostrarTodas >                 
-      <div class="container">
-        <div class="row">
-          <!-- Persona nro 1 de la pagina -->
-          <div *ngIf ="personas?.length >= indicePagina+1" class="post col-xl-6">
-            <div tabindex="0" class="post-thumbnail"><img src={{fotoRuta}}{{personas[indicePagina]?.foto}}  alt=Foto:{{personas[indicePagina]?.nombres}},{{personas[(indicePagina)]?.apellidos}} class="img-fluid"></div>
-            <div class="post-details">
-              <div class="post-meta d-flex justify-content-between">
-                <div tabindex="0" class="date meta-last">{{personas[(indicePagina)]?.fechaInicio | date:'dd/MM/yyyy' }}</div>
-              </div>
-              <a (click)="setearFiltro(personas[(indicePagina)]?.nombres, personas[(indicePagina)]?.apellidos,personas[(indicePagina)]?._id)" 
-                (Keyup.enter)="setearFiltro(personas[(indicePagina)]?.nombres, personas[(indicePagina)]?.apellidos,personas[(indicePagina)]?._id)"     
-                title="Link a información detallada del Personal seleccionado">
-                <h2 tabindex="0" class="h4">{{personas[(indicePagina)]?.nombres | uppercase }}, {{personas[(indicePagina)]?.apellidos | uppercase }}</h2>
-              </a>
-              <p tabindex="0" class="text-muted">{{personas[(indicePagina)]?.titulos}}</p>
+            <!-- Persona nro 2 de la pagina -->
+            <div *ngIf ="personas?.length >=indicePagina+2" class="post col-xl-6">
+              <div tabindex="0" class="post-thumbnail"><img src={{fotoRuta}}{{personas[indicePagina+1]?.foto}} alt=Foto:{{personas[(indicePagina+1)]?.nombres}},{{personas[(indicePagina+1)]?.apellidos}} class="img-fluid"></div>
+              <div class="post-details">
+                <div class="post-meta d-flex justify-content-between">
+                  <div tabindex="0" class="date meta-last">{{personas[indicePagina+1]?.fechaInicio | date:'dd/MM/yyyy' }}</div>
+                </div>
+                <a (click)="setearFiltro(personas[(indicePagina+1)]?.nombres, personas[(indicePagina+1)]?.apellidos, personas[(indicePagina+1)]?._id)" 
+                  (Keyup.enter)="setearFiltro(personas[(indicePagina+1)]?.nombres, personas[(indicePagina+1)]?.apellidos, personas[(indicePagina+1)]?._id)" 
+                  title="Link a información detallada del Personal seleccionado">
+                  <h2 tabindex="0" class="h4">{{personas[indicePagina+1]?.nombres | uppercase }}, {{personas[indicePagina+1]?.apellidos | uppercase }}</h2>
+                </a>
+                <p tabindex="0" class="text-muted">{{personas[indicePagina+1]?.titulos}}</p>
+                </div>
             </div>
-          </div>
-          <!-- Persona nro 2 de la pagina -->
-          <div *ngIf ="personas?.length >=indicePagina+2" class="post col-xl-6">
-            <div tabindex="0" class="post-thumbnail"><img src={{fotoRuta}}{{personas[indicePagina+1]?.foto}} alt=Foto:{{personas[(indicePagina+1)]?.nombres}},{{personas[(indicePagina+1)]?.apellidos}} class="img-fluid"></div>
-            <div class="post-details">
-              <div class="post-meta d-flex justify-content-between">
-                <div tabindex="0" class="date meta-last">{{personas[indicePagina+1]?.fechaInicio | date:'dd/MM/yyyy' }}</div>
+            <!-- Persona nro 3 de la pagina -->
+            <div *ngIf ="personas?.length >=indicePagina+3" class="post col-xl-6">
+              <div tabindex="0" class="post-thumbnail"><img src={{fotoRuta}}{{personas[indicePagina+2]?.foto}}  alt=Foto:{{personas[(indicePagina+2)]?.nombres}},{{personas[(indicePagina+2)]?.apellidos}} class="img-fluid"></div>
+              <div class="post-details">
+                <div class="post-meta d-flex justify-content-between">
+                  <div tabindex="0" class="date meta-last">{{personas[indicePagina+2]?.fechaInicio | date:'dd/MM/yyyy' }}</div>
+                </div>
+                <a (click)="setearFiltro(personas[(indicePagina+2)]?.nombres, personas[(indicePagina+2)]?.apellidos,personas[(indicePagina+2)]?._id)" 
+                    (Keyup.enter)="setearFiltro(personas[(indicePagina+2)]?.nombres, personas[(indicePagina+2)]?.apellidos,personas[(indicePagina+2)]?._id)" 
+                    title="Link a información detallada del Personal seleccionado"> 
+                  <h2 tabindex="" class="h4">{{personas[indicePagina+2]?.nombres | uppercase }},{{personas[indicePagina+2]?.apellidos | uppercase }} </h2>
+                </a>
+                <p tabindex="0" class="text-muted">{{personas[indicePagina+2]?.titulos}}</p>
               </div>
-              <a (click)="setearFiltro(personas[(indicePagina+1)]?.nombres, personas[(indicePagina+1)]?.apellidos, personas[(indicePagina+1)]?._id)" 
-                (Keyup.enter)="setearFiltro(personas[(indicePagina+1)]?.nombres, personas[(indicePagina+1)]?.apellidos, personas[(indicePagina+1)]?._id)" 
-                title="Link a información detallada del Personal seleccionado">
-                <h2 tabindex="0" class="h4">{{personas[indicePagina+1]?.nombres | uppercase }}, {{personas[indicePagina+1]?.apellidos | uppercase }}</h2>
-              </a>
-              <p tabindex="0" class="text-muted">{{personas[indicePagina+1]?.titulos}}</p>
+            </div>
+            <!-- Persona nro 4 de la pagina -->
+            <div *ngIf ="personas?.length >=indicePagina+4" class="post col-xl-6">
+              <div tabindex="0" class="post-thumbnail"><img src={{fotoRuta}}{{personas[indicePagina+3]?.foto}} alt=Foto:{{personas[(indicePagina+3)]?.nombres}},{{personas[(indicePagina+3)]?.apellidos}}  class="img-fluid"></div>
+              <div class="post-details">
+                <div class="post-meta d-flex justify-content-between">
+                  <div tabindex="0" class="date meta-last">{{personas[indicePagina+3]?.fechaInicio | date:'dd/MM/yyyy' }}</div>
+                </div>
+                <a (click)="setearFiltro(personas[(indicePagina+3)]?.nombres,personas[(indicePagina+3)]?.apellidos,personas[(indicePagina+3)]?._id )" 
+                  (Keyup.enter)="setearFiltro(personas[(indicePagina+3)]?.nombres,personas[(indicePagina+3)]?.apellidos,personas[(indicePagina+3)]?._id )" 
+                  title="Link a información detallada del Personal seleccionado">
+                  <h2 tabindex="0" class="h4">{{personas[indicePagina+3]?.nombres | uppercase }},{{personas[indicePagina+3]?.apellidos | uppercase }} </h2>
+                </a>
+                <p tabindex="0" class="text-muted">{{personas[indicePagina+3]?.titulos}}</p>
               </div>
-          </div>
-          <!-- Persona nro 3 de la pagina -->
-          <div *ngIf ="personas?.length >=indicePagina+3" class="post col-xl-6">
-            <div tabindex="0" class="post-thumbnail"><img src={{fotoRuta}}{{personas[indicePagina+2]?.foto}}  alt=Foto:{{personas[(indicePagina+2)]?.nombres}},{{personas[(indicePagina+2)]?.apellidos}} class="img-fluid"></div>
-            <div class="post-details">
-              <div class="post-meta d-flex justify-content-between">
-                <div tabindex="0" class="date meta-last">{{personas[indicePagina+2]?.fechaInicio | date:'dd/MM/yyyy' }}</div>
-              </div>
-              <a (click)="setearFiltro(personas[(indicePagina+2)]?.nombres, personas[(indicePagina+2)]?.apellidos,personas[(indicePagina+2)]?._id)" 
-                  (Keyup.enter)="setearFiltro(personas[(indicePagina+2)]?.nombres, personas[(indicePagina+2)]?.apellidos,personas[(indicePagina+2)]?._id)" 
-                  title="Link a información detallada del Personal seleccionado"> 
-                <h2 tabindex="" class="h4">{{personas[indicePagina+2]?.nombres | uppercase }},{{personas[indicePagina+2]?.apellidos | uppercase }} </h2>
-              </a>
-              <p tabindex="0" class="text-muted">{{personas[indicePagina+2]?.titulos}}</p>
             </div>
           </div>
-          <!-- Persona nro 4 de la pagina -->
-          <div *ngIf ="personas?.length >=indicePagina+4" class="post col-xl-6">
-            <div tabindex="0" class="post-thumbnail"><img src={{fotoRuta}}{{personas[indicePagina+3]?.foto}} alt=Foto:{{personas[(indicePagina+3)]?.nombres}},{{personas[(indicePagina+3)]?.apellidos}}  class="img-fluid"></div>
-            <div class="post-details">
-              <div class="post-meta d-flex justify-content-between">
-                <div tabindex="0" class="date meta-last">{{personas[indicePagina+3]?.fechaInicio | date:'dd/MM/yyyy' }}</div>
+          <!-- Pagination de las excavaciones resumidas-->
+          <nav aria-label="Navegación de la página de Personal">
+              <div class="pagination pagination-template d-flex justify-content-center">
+                <pagination [totalItems]="personas.length" [itemsPerPage]="4" [(ngModel)]="currentPage"
+                (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;" ></pagination>
               </div>
-              <a (click)="setearFiltro(personas[(indicePagina+3)]?.nombres,personas[(indicePagina+3)]?.apellidos,personas[(indicePagina+3)]?._id )" 
-                (Keyup.enter)="setearFiltro(personas[(indicePagina+3)]?.nombres,personas[(indicePagina+3)]?.apellidos,personas[(indicePagina+3)]?._id )" 
-                title="Link a información detallada del Personal seleccionado">
-                <h2 tabindex="0" class="h4">{{personas[indicePagina+3]?.nombres | uppercase }},{{personas[indicePagina+3]?.apellidos | uppercase }} </h2>
-              </a>
-              <p tabindex="0" class="text-muted">{{personas[indicePagina+3]?.titulos}}</p>
-            </div>
-          </div>
+          </nav>
+        </div>         
         </div>
-        <!-- Pagination de las excavaciones resumidas-->
-        <nav aria-label="Navegación de la página de Personal">
-            <div class="pagination pagination-template d-flex justify-content-center">
-              <pagination [totalItems]="personas.length" [itemsPerPage]="4" [(ngModel)]="currentPage"
-              (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;" ></pagination>
-            </div>
-        </nav>
-      </div>         
-    </div>
+      </div>
+      <!--Si NO EXISTE personal -->
+      <div *ngIf = "personas?.length == 0" >
+          <div class="post blog-post col-lg-8"> 
+              <div class="post-thumbnail"><img  src="assets/datos/personal/portada.jpg" alt="Portada general, SIN personal " class="img-fluid"></div>            
+              <h1 tabindex="0">NO HAY PERSONAL PARA VISUALIZAR</h1>
+          </div>
+      </div>
   </main>
     <!--LO QUE VA EN EL LATERAL....-->
-    <aside class="col-lg-4" *ngIf="personas.length > 0" >
+    <aside class="col-lg-4" *ngIf="personas?.length > 0" >
       <!-- Busqueda de persona-->
       <div class="widget search" *ngIf=mostrarTodas>
         <h3 tabindex="0" class="h6">Busqueda de Personal</h3>
@@ -159,18 +162,21 @@
                 <input tabindex="0" type="search" placeholder="Busca por Nombres" [(ngModel)]= filtrado.nombres name="filtroNombres" aria-label="Para ingresar Nombre de busqueda">
                 <input tabindex="0" type="search" placeholder="Busca por Apellidos" [(ngModel)]= filtrado.apellidos name="filtroApellidos" aria-label="Para ingresar Apellido de busqueda">
                 <input tabindex="0" type="search" placeholder="Busca por Documento: sin puntos" [(ngModel)]= filtrado.dni name="filtroDni" aria-label="Para ingresar DNI de busqueda">
-                <button tabindex="0" type="submit" class="submit" (click)="mostrarPersona()" (keyup.enter)="mostrarPersona()" aria-label="Buscar por lo solicitado"><i class="icon-search"></i></button> 
+                <button role="button" type="submit" class="submit" (click)="mostrarPersona()" (keyup.enter)="mostrarPersona()" aria-label="Buscar por lo solicitado">
+                  <a class="icon-search">   Buscar</a></button> 
             </div>
         </div>          
       
       </div>
       <!-- Volver a ver todo el Personal-->
       <div class="widget search" *ngIf=!mostrarTodas>
-        <h3 tabindex="0" class="h6">Mostrar Todas las Personas</h3>
+        <h3 tabindex="0" class="h6">Mostrar Todo el Personal</h3>
         <div class="search-form">
             <div class="form-group">
-            <input tabindex="0" type="text" placeholder="Ver todo Personal, click lupa" readonly aria-label="Info para ver todo personal, presional la Lupa">
-            <button tabindex="0" type="submit" class="submit" (click)="mostrarPersona()" (keyup.enter)="mostrarPersona()" aria-label="Click para ver todo el Personal" title="Presionar para ver todo el Personal"><i class="icon-search"></i></button>
+            <input type="text" placeholder="Ver todo Personal, click lupa" readonly name="vertodoPersonal"
+            title="Permite volver a ver todo el personal">
+            <button role="button" type="submit" class="submit" (click)="mostrarPersona()" (keyup.enter)="mostrarPersona()" name="ver todo el Personal" title="Presionar para ver todo el Personal"
+              aria-label="Ver todo el Personal" ><a class="icon-search">   Volver</a></button>
             </div>
         </div>
       </div>
@@ -178,8 +184,9 @@
       <div class="widget categories" *ngIf="(mostrarTodas && personas.length >0 )" >
         <h3 tabindex="0" class="h6">Personal del Museo: </h3>
         <div  *ngFor="let persona of personas | orderBy:['nombres'] ">
-          <div class="item d-flex justify-content-between" ><a (click)="setearFiltro(persona.nombres, persona.apellidos, persona._id)" (keyup.enter)="setearFiltro(persona.nombres, persona.apellidos, persona._id)" title="Link a información detallada del Personal seleccionado" >{{persona.nombres}}, {{persona.apellidos}}</a></div>
-          <br>
+          <div class="item d-flex justify-content-between" >
+            <a (click)="setearFiltro(persona.nombres, persona.apellidos, persona._id)" (keyup.enter)="setearFiltro(persona.nombres, persona.apellidos, persona._id)" title="Link a información detallada del Personal seleccionado" >{{persona.nombres}}, {{persona.apellidos}}</a></div>
+            <p> </p>
         </div>
       </div>
       <!--Muestra las excavaciones donde la persona Seleccionada es Paleontologo -->
@@ -187,18 +194,19 @@
         <h3 tabindex="0" class="h6">Excavaciones donde es Paleontologo:</h3>
         <div class="blog-posts" >
             <div class="item d-flex align-items-center" *ngFor="let exca of excaPaleo | orderBy:['nombre']">
-              <div tabindex="0" class="image"><a href={{rutaExca}}{{exca._id}}{{exca.fotosExcavacion[0].nombre}} title={{exca.fotosExcavacion[0].descripcion}}  ata-fancybox="gallery" class="image">
-                <img src={{rutaExca}}{{exca._id}}{{exca.fotosExcavacion[0].nombre}} alt={{exca.fotosExcavacion[0].descripcion}} class="img-fluid"></a>
+              <div tabindex="0" class="image"><a href={{rutaExca}}{{exca._id}}{{exca.fotosExcavacion[0].nombre}} title="Ir a galería de fotos que contiene a {{exca.fotosExcavacion[0].descripcion}}"  data-fancybox="gallery" class="image">
+                <img src={{rutaExca}}{{exca._id}}{{exca.fotosExcavacion[0].nombre}} alt={{exca.fotosExcavacion[0].descripcion}} class="img-fluid">
+              </a>
               </div>
               <div tabindex="0" class="title"><strong>{{exca.nombre | uppercase }}</strong>
                 <div tabindex="0">Código:{{exca.codigo}}</div> 
                 <div tabindex="0">Fecha inicio: {{exca.fechaInicio | date:'dd/MM/yyyy' }}</div> 
-                <ul tabindex="0" class="list-inline"><strong>Ubicación Geográfica:</strong>
-                  <li tabindex="0" class="list-inline-item">Area: {{exca.area}}</li>
-                  <li tabindex="0" class="list-inline-item">Localidad: {{exca.localidad}} </li>
-                  <li tabindex="0" class="list-inline-item">Provincia: {{exca.provincia}} </li>                        
-                  <li tabindex="0" class="list-inline-item">PuntoGPS: {{exca.puntoGps[0]}},{{exca.puntoGps[1]}} </li>                        
-                </ul>                
+                <div tabindex="0" class="list-inline"><strong>Ubicación Geográfica:</strong>
+                  <div tabindex="0" class="list-inline-item">Area: {{exca.area}}</div>
+                  <div tabindex="0" class="list-inline-item">Localidad: {{exca.localidad}} </div>
+                  <div tabindex="0" class="list-inline-item">Provincia: {{exca.provincia}} </div>                        
+                  <div tabindex="0" class="list-inline-item">PuntoGPS: {{exca.puntoGps[0]}},{{exca.puntoGps[1]}} </div>                        
+                </div>                
             </div>
           </div>
         </div>
@@ -208,18 +216,19 @@
         <h3 tabindex="0" class="h6">Excavaciones donde es Colector:</h3>
         <div class="blog-posts" >
             <div class="item d-flex align-items-center" *ngFor="let exca of excaColec | orderBy:['nombre']">
-              <div tabindex="0" class="image"><a href={{rutaExca}}{{exca._id}}{{exca.fotosExcavacion[0].nombre}} title={{exca.fotosExcavacion[0].descripcion}} data-fancybox="gallery" class="image">
-                <img src={{rutaExca}}{{exca._id}}{{exca.fotosExcavacion[0].nombre}} alt={{exca.fotosExcavacion[0].descripcion}} class="img-fluid"></a>
+              <div tabindex="0" class="image"><a href={{rutaExca}}{{exca._id}}{{exca.fotosExcavacion[0].nombre}} title="Ir a galería de fotos que contiene a {{exca.fotosExcavacion[0].descripcion}}" data-fancybox="gallery" class="image">
+                <img src={{rutaExca}}{{exca._id}}{{exca.fotosExcavacion[0].nombre}} alt={{exca.fotosExcavacion[0].descripcion}} class="img-fluid">
+              </a>
               </div>
                 <div tabindex="0" class="title"><strong>{{exca.nombre | uppercase }}</strong>
                   <div tabindex="0">Código:{{exca.codigo}}</div> 
                   <div tabindex="0">Fecha inicio: {{exca.fechaInicio | date:'dd/MM/yyyy' }}</div> 
-                  <ul tabindex="0" class="list-inline"><strong>Ubicación Geográfica:</strong>
-                    <li tabindex="0" class="list-inline-item">Area: {{exca.area}}</li>
-                    <li tabindex="0" class="list-inline-item">Localidad: {{exca.localidad}} </li>
-                    <li tabindex="0" class="list-inline-item">Provincia: {{exca.provincia}} </li>
-                    <li tabindex="0" class="list-inline-item">PuntoGPS: {{exca.puntoGps[0]}},{{exca.puntoGps[1]}} </li>                                                
-                  </ul>                 
+                  <div tabindex="0" class="list-inline"><strong>Ubicación Geográfica:</strong>
+                    <div tabindex="0" class="list-inline-item">Area: {{exca.area}}</div>
+                    <div tabindex="0" class="list-inline-item">Localidad: {{exca.localidad}} </div>
+                    <div tabindex="0" class="list-inline-item">Provincia: {{exca.provincia}} </div>
+                    <div tabindex="0" class="list-inline-item">PuntoGPS: {{exca.puntoGps[0]}},{{exca.puntoGps[1]}} </div>                                                
+                  </div>                 
                 </div>
             </div>
         </div>

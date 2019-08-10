@@ -8,8 +8,8 @@ export const config = {
     rutaPersonalFoto:'assets/datos/personal/fotosPersonal/',
     rutaHome:'assets/datos/home/',
     rutaPieza:'assets/datos/piezas/',
-    //url:'http://localhost:3001/api/',
-    url:'http://museo.fi.uncoma.edu.ar:3001/api/',
+  //url:'http://localhost:3001/api/',
+  url:'http://museo.fi.uncoma.edu.ar:3001/api/',
 
 }
 
