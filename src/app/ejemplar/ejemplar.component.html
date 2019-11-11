@@ -9,9 +9,10 @@
               <div *ngIf ="(ejemplares | filterBy:filtrado).length == 1">
                 <div class="container">                  
                     <div class="post-single"  *ngFor="let ejemplar of ejemplares | filterBy:filtrado | orderBy:['nombre'] " >
-                      <div tabindex="0" class="post-thumbnail"><img  src={{rutaEjem}}{{ejemplar._id}}{{ejemplar.ilustracionCompleta}} alt={{ejemplar.descripcionIC}} class="img-fluid"></div>            
+                      <div class="post-thumbnail" tabindex="0" ><img  src={{rutaEjem}}{{ejemplar._id}}{{ejemplar.ilustracionCompleta}} alt={{ejemplar.descripcionIC}} class="img-fluid"></div>            
                       <div class="post-details">
                         <h2 tabaindex="0"  >{{ejemplar.nombre}}:{{ejemplar.periodo}}</h2>  
+                        <!--Muestra la clasificación y descripción del ejemplar -->
                         <div class="widget tags"> 
                           <h3 tabaindex="0" class="h5">Nro de Coleccion:{{ejemplar.nroColeccion}} </h3>
                           <h3 tabaindex="0" class="h6" >Fecha de Ingreso: {{ejemplar.fechaIngresoColeccion | date:'dd/MM/yyyy'}}</h3>
@@ -38,67 +39,17 @@
                           <p tabaindex="0" class="lead">{{ejemplar.descripcion1}}</p>
                           <p tabaindex="0">{{ejemplar.descripcion1A}}</p>
                         </div>
-                        <div class="post-body">
-                          <!-- CARRUSEL COMUN 
-                          <carousel *ngIf = "ejemplar.fotosEjemplar.length >=1 " >
-                              <slide *ngFor ="let foto of ejemplar.fotosEjemplar" >
-                                <img src={{rutaEjem}}{{ejemplar._id}}{{foto.nombre}} alt={{foto.descripcion}} style="display: block; width: 100%;">
-                              </slide>                        
-                          </carousel>
-                         -->
-                          <!--ACA SE VERIFICA QUE EXISTAN AL MENOS 4 FOTOS PARA MOSTRAR EN CARRUSEL-->  
-                          <div *ngIf="ejemplar.fotosEjemplar.length >= 4">                                                 
-                          <!--***************************CARUSEL************************************************************************-->
-                          <div id="fotosEjemplar" class="carousel slide" data-ride="carousel"  data-interval="false" 
-                          role="complementary" aria-labelledby="id_title" aria-describedby="id_desc" >
-                              <h2 id="id_title" class="sr-only">Carousel que contiene 4 Fotos.</h2>
-                              <p id="id_desc" class="sr-only">El carousel es un conjunto de imagenes que no rotan automáticamente, 
-                                Use Enter o los botones anterior y siguiente para cambiar la foto que se esta mostrando.</p>
-                              <!-- Indicators -->
-                              <ul class="carousel-indicators" >
-                                <li  data-target="#fotosEjemplar" data-slide-to="0" class="active">Primer Foto</li>
-                                <li  data-target="#fotosEjemplar" data-slide-to="1">Segunda Foto</li>
-                                <li  data-target="#fotosEjemplar" data-slide-to="2">Tecer Foto</li>
-                                <li  data-target="#fotosEjemplar" data-slide-to="3">Cuarta Foto</li>
-                              </ul>                          
-                              <!-- The slideshow -->
-                              <div class="carousel-inner">
-                                <div class="carousel-item active" aria-selected="true" tabindex="0">
-                                  <img src={{rutaEjem}}{{ejemplar._id}}{{ejemplar.fotosEjemplar[0].nombre}} alt={{ejemplar.fotosEjemplar[0].descripcion}} width="1100" height="500">
-                                  <div class="carousel-caption d-none d-md-block">
-                                      <h3>{{ejemplar.fotosEjemplar[0].descripcion}} - (Nombre: {{ejemplar.fotosEjemplar[0].nombre}})</h3>
-                                    </div>
-                                </div>
-                                <div class="carousel-item"  aria-selected="false" tabindex="-1">
-                                  <img src={{rutaEjem}}{{ejemplar._id}}{{ejemplar.fotosEjemplar[1].nombre}} alt={{ejemplar.fotosEjemplar[1].descripcion}} width="1100" height="500">
-                                  <div class="carousel-caption d-none d-md-block">
-                                      <h3>{{ejemplar.fotosEjemplar[1].descripcion}} - (Nombre: {{ejemplar.fotosEjemplar[1].nombre}})</h3>
-                                    </div>
-                                </div>    
-                                <div class="carousel-item"  aria-selected="false" tabindex="-1">
-                                    <img src={{rutaEjem}}{{ejemplar._id}}{{ejemplar.fotosEjemplar[2].nombre}} alt={{ejemplar.fotosEjemplar[2].descripcion}} width="1100" height="500">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h3>{{ejemplar.fotosEjemplar[2].descripcion}} - (Nombre: {{ejemplar.fotosEjemplar[2].nombre}})</h3>
-                                      </div>
-                                  </div>                            
-                                <div class="carousel-item"  aria-selected="false" tabindex="-1">
-                                    <img src={{rutaEjem}}{{ejemplar._id}}{{ejemplar.fotosEjemplar[3].nombre}} alt={{ejemplar.fotosEjemplar[3].descripcion}} width="1100" height="500">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h3>{{ejemplar.fotosEjemplar[3].descripcion}} - (Nombre: {{ejemplar.fotosEjemplar[3].nombre}})</h3>
-                                      </div>
-                                  </div>                                
-                              </div>                          
-                              <!-- Left and right controls -->
-                              <a class="carousel-control-prev" href="#fotosEjemplar" role="button" data-slide="prev" >
-                                <span class="carousel-control-prev-icon"></span>
-                              </a>
-                              <a class="carousel-control-next" href="#fotosEjemplar" role="button" data-slide="next" >
-                                <span class="carousel-control-next-icon"></span>
-                              </a>
+                        <!--Muestra la galeria de fotos del ejemplar -->
+                        <div class="widget tags">    
+                          <h2 class="h3">Galería de Fotos: </h2>                     
+                          <div class="item d-flex align-items-center" >
+                            <div class="image" *ngFor="let foto of ejemplar.fotosEjemplar">
+                              <a href={{rutaEjem}}{{ejemplar._id}}{{foto.nombre}}  title="Ir a galería de fotos que contiene a {{foto.descripcion}}" data-fancybox="gallery" class="image">
+                              <img src={{rutaEjem}}{{ejemplar._id}}{{foto.nombre}} alt={{foto.descripcion}} class="img-fluid"></a>
                             </div>
-                          </div>
-                          <!-- ********************************************************************************************************* -->                    
-                        </div>
+                          </div>   
+                        </div>  
+                        <!--Muestra era geologica y area de hallazgo -->                     
                         <div class="widget tags" >
                           <h3 tabaindex="0">Era Geologica: </h3>
                           <p tabaindex="0">{{ejemplar.descripcion2}}</p>
@@ -116,7 +67,7 @@
                           <p tabaindex="0"><strong>Nombre: </strong>{{ejemplar.areaHallazgo[0].nombreArea}}</p>
                           <p tabaindex="0"><strong>País: </strong>{{ejemplar.areaHallazgo[0].pais}}</p>
                           <p tabaindex="0"><strong>Ciudad: </strong>{{ejemplar.areaHallazgo[0].ciudad}}</p>                          
-                        </div> 
+                        </div>                         
                       </div>
                     </div>
                 </div>

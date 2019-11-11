@@ -126,7 +126,7 @@
                         <p  tabindex="0" class="category">Fin de Excavacion: {{excavacion.fechaBaja | date:'dd/MM/yyyy' }}</p>
                       </div>
                     </div>
-                    <h2  tabindex="0"  >{{excavacion.codigo}}: {{excavacion.nombre | uppercase}}</h2>
+                    <h2  tabindex="0">{{excavacion.codigo}}: {{excavacion.nombre | uppercase}}</h2>
                     <!--Muestra las descripcion de la excavacion y si tuviera los ejemplares -->
                     <div class="widget tags"> 
                       <h3  tabindex="0" class="lead">{{excavacion.descripcion}}</h3>   
@@ -161,88 +161,44 @@
                         <!--</div>-->
                       </div>
                     </div>
-                    <div class="post-body">    
-                    <!--ACA SE VERIFICA QUE EXISTAN AL MENOS 4 FOTOS PARA MOSTRAR EN CARRUSEL-->  
-                    <div *ngIf="excavacion.fotosExcavacion.length >= 4">                                                 
-                      <!--***************************CARUSEL************************************************************************-->
-                      <div id="fotosExcavacion" class="carousel slide" data-ride="carousel"  data-interval="false" 
-                        role="complementary" aria-labelledby="id_title" aria-describedby="id_desc" >
-                            <h2 id="id_title" class="sr-only">Carousel que contiene 4 Fotos.</h2>
-                            <p id="id_desc" class="sr-only">El carousel es un conjunto de imagenes que no rotan automáticamente, 
-                              Use Enter o los botones anterior y siguiente para cambiar la foto que se esta mostrando.</p>
-                            <!-- Indicators -->
-                            <ul class="carousel-indicators" >
-                              <li  data-target="#fotosExcavacion" data-slide-to="0" class="active">Primer Foto</li>
-                              <li  data-target="#fotosExcavacion" data-slide-to="1">Segunda Foto</li>
-                              <li  data-target="#fotosExcavacion" data-slide-to="2">Tecer Foto</li>
-                              <li  data-target="#fotosExcavacion" data-slide-to="3">Cuarta Foto</li>
-                            </ul>                          
-                            <!-- The slideshow -->
-                            <div class="carousel-inner">
-                              <div class="carousel-item active" aria-selected="true" tabindex="0">
-                                <img src={{rutaExca}}{{excavacion._id}}{{excavacion.fotosExcavacion[0].nombre}} alt={{excavacion.fotosExcavacion[0].descripcion}} width="1100" height="500">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h3>{{excavacion.fotosExcavacion[0].descripcion}} - (Nombre: {{excavacion.fotosExcavacion[0].nombre}})</h3>
-                                  </div>
-                              </div>
-                              <div class="carousel-item"  aria-selected="false" tabindex="-1">
-                                <img src={{rutaExca}}{{excavacion._id}}{{excavacion.fotosExcavacion[1].nombre}} alt={{excavacion.fotosExcavacion[1].descripcion}} width="1100" height="500">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h3>{{excavacion.fotosExcavacion[1].descripcion}} - (Nombre: {{excavacion.fotosExcavacion[1].nombre}})</h3>
-                                  </div>
-                              </div>    
-                              <div class="carousel-item"  aria-selected="false" tabindex="-1">
-                                  <img src={{rutaExca}}{{excavacion._id}}{{excavacion.fotosExcavacion[2].nombre}} alt={{excavacion.fotosExcavacion[2].descripcion}} width="1100" height="500">
-                                  <div class="carousel-caption d-none d-md-block">
-                                      <h3>{{excavacion.fotosExcavacion[2].descripcion}} - (Nombre: {{excavacion.fotosExcavacion[2].nombre}})</h3>
-                                    </div>
-                                </div>                            
-                              <div class="carousel-item"  aria-selected="false" tabindex="-1">
-                                  <img src={{rutaExca}}{{excavacion._id}}{{excavacion.fotosExcavacion[3].nombre}} alt={{excavacion.fotosExcavacion[3].descripcion}} width="1100" height="500">
-                                  <div class="carousel-caption d-none d-md-block">
-                                      <h3>{{excavacion.fotosExcavacion[3].descripcion}} - (Nombre: {{excavacion.fotosExcavacion[3].nombre}})</h3>
-                                    </div>
-                                </div>                                
-                            </div>                          
-                            <!-- Left and right controls -->
-                            <a class="carousel-control-prev" href="#fotosExcavacion" role="button" data-slide="prev" >
-                              <span class="carousel-control-prev-icon"></span>
-                            </a>
-                            <a class="carousel-control-next" href="#fotosExcavacion" role="button" data-slide="next" >
-                              <span class="carousel-control-next-icon"></span>
-                            </a>
-                          </div>
-                    </div>
-                    <!-- ********************************************************************************************************* -->                    
-                      <!--Muestra el personal de la excavacion si lo tiene -->
-                      <div class="widget tags" >
-                        <h2 class="h3">PERSONAL DE LA EXCAVACION: </h2>
-                        <div *ngFor = "let excavacion of excavaciones | filterBy:filtrado">
-                          <div class="widget tags" *ngFor ="let persona of personal | filterBy:{_id:excavacion.directorId} ">                        
-                            <h3 tabindex="0" class="h4">Director de Excavación: </h3>
-                            <h4  tabindex="0"  class="h6">{{persona.nombres}}, {{persona.apellidos}} </h4>
-                            <h5 class="h6">Titulo: {{persona.titulos[0]}} </h5>
-                          </div>
-                          <div class="widget tags"  *ngFor ="let persona of personal | filterBy:{_id:excavacion.paleontologo} ">
-                            <h3  tabindex="0"  class="h4">Paleontologo de Excavación: </h3>
-                            <h4  tabindex="0"  class="h6">{{persona.nombres}}, {{persona.apellidos}} </h4>
-                            <h5  class="h6">Titulo: {{persona.titulos[0]}} </h5>
-                          </div>
-                          <div class="widget tags" *ngFor ="let persona of personal | filterBy:{_id:excavacion.colector} ">
-                            <h3   tabindex="0" class="h4">Colector de Excavación: </h3>
-                            <h4   tabindex="0" class="h6">{{persona.nombres}}, {{persona.apellidos}} </h4>
-                            <h5 class="h6">Titulo: {{persona.titulos[0]}} </h5>
-                          </div>
-                          <div *ngIf="!(excavacion.motivoBaja == '')">
-                            <p  tabindex="0"  class="category">Motivo de Baja: {{excavacion.motivoBaja}}</p>
-                          </div>
-                        </div>                      
-                      </div>                                      
-                    </div>
+                    <!--Muestra la galeria de fotos de la excavacion -->
+                    <div class="widget tags">    
+                      <h2 class="h3">Galería de Fotos: </h2>
+                      <div class="item d-flex align-items-center" >
+                        <div class="image" *ngFor="let foto of excavacion.fotosExcavacion">
+                          <a href={{rutaExca}}{{excavacion._id}}{{foto.nombre}}  title="Ir a galería de fotos que contiene a {{foto.descripcion}}" data-fancybox="gallery" class="image">
+                          <img src={{rutaExca}}{{excavacion._id}}{{foto.nombre}} alt={{foto.descripcion}} class="img-fluid"></a>
+                        </div>
+                      </div>  
+                    </div>   
+                    <!--Muestra el personal de la excavacion si lo tiene -->
+                    <div class="widget tags" >
+                      <h2 class="h3">Personal de la Excavación: </h2>
+                      <div *ngFor = "let excavacion of excavaciones | filterBy:filtrado">
+                        <div class="widget tags" *ngFor ="let persona of personal | filterBy:{_id:excavacion.directorId} ">                        
+                          <h3 tabindex="0" class="h4">Director de Excavación: </h3>
+                          <h4  tabindex="0"  class="h6">{{persona.nombres}}, {{persona.apellidos}} </h4>
+                          <h5 class="h6">Titulo: {{persona.titulos[0]}} </h5>
+                        </div>
+                        <div class="widget tags"  *ngFor ="let persona of personal | filterBy:{_id:excavacion.paleontologo} ">
+                          <h3  tabindex="0"  class="h4">Paleontologo de Excavación: </h3>
+                          <h4  tabindex="0"  class="h6">{{persona.nombres}}, {{persona.apellidos}} </h4>
+                          <h5  class="h6">Titulo: {{persona.titulos[0]}} </h5>
+                        </div>
+                        <div class="widget tags" *ngFor ="let persona of personal | filterBy:{_id:excavacion.colector} ">
+                          <h3   tabindex="0" class="h4">Colector de Excavación: </h3>
+                          <h4   tabindex="0" class="h6">{{persona.nombres}}, {{persona.apellidos}} </h4>
+                          <h5 class="h6">Titulo: {{persona.titulos[0]}} </h5>
+                        </div>
+                        <div *ngIf="!(excavacion.motivoBaja == '')">
+                          <p  tabindex="0"  class="category">Motivo de Baja: {{excavacion.motivoBaja}}</p>
+                        </div>
+                      </div>                      
+                    </div>                                                          
                   </div>                                 
                   </div>
                 </div>
-            </div>  
+            </div>              
           </div>
           <!-- La busqueda o seleccion dio resultado vacio-->
           <div *ngIf = "(excavaciones | filterBy:filtrado ).length == 0 "   class="post-body" >
